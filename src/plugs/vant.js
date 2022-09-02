@@ -5,7 +5,7 @@ import {
     TabbarItem,
     Icon,
     Swipe, 
-    SwipeItem 
+    SwipeItem,
 } from 'vant'
 
 Vue.use(Tabbar);
