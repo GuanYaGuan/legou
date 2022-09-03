@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import vant from '../src/plugs/vant'
+import * as vant from '../src/plugs/vant.js'
 import 'lib-flexible'
 
 Vue.config.productionTip = false
