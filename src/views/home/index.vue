@@ -4,7 +4,9 @@
     <div class="nav">
       <van-icon size="20" name="location-o" />
       <van-icon size="20" name="search" />
-      <input type="text" placeholder="搜索商品" />
+      <div @click="openSearch">
+        <input type="text" placeholder="搜索商品" />
+      </div>
     </div>
     <!-- 轮播图 -->
     <div class="banner">
@@ -35,18 +37,18 @@
     <!-- 新品首发 -->
     <div class="new-title">
       <div>
-        <p>新品首发</p>
-        <p>查看全部</p>
+        <span>新品首发</span>
+        <span>查看全部</span>
       </div>
     </div>
     <!-- 新品首发的产品列 -->
     <div class="product">
       <ul>
         <li v-for="item in dataInfo.newGoods" :key="item.id">
-          <span class="name">{{ item.name }}</span>
-          <span class="desc">{{ item.goods_brief }}</span>
-          <span class="price">{{ item.retail_price }}</span>
           <img :src="item.list_pic_url" alt="" />
+          <p class="name">{{ item.name }}</p>
+          <p class="desc">{{ item.goods_brief }}</p>
+          <p class="price">{{ item.retail_price }}</p>
         </li>
       </ul>
     </div>
@@ -71,7 +73,12 @@ export default {
       });
   },
 
-  methods: {},
+  methods: {
+    // 点击跳转到 search 页面
+    openSearch() {
+      this.$router.push("/home/search");
+    },
+  },
 };
 </script>
 
@@ -84,23 +91,26 @@ div {
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
-    height: 50px;
     line-height: 16px;
+    padding: 15px;
     .van-icon {
       margin: 0 10px;
     }
-    input {
-      box-sizing: border-box;
-      width: 100%;
-      min-width: 0;
-      margin: 0;
-      padding: 0;
-      color: #323233;
-      line-height: inherit;
-      text-align: left;
-      background-color: transparent;
-      border: 0;
-      resize: none;
+    div {
+      width: 200px;
+      height: 100%;
+      input {
+        box-sizing: border-box;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+        color: #323233;
+        line-height: inherit;
+        text-align: left;
+        background-color: transparent;
+        border: 0;
+        resize: none;
+      }
     }
   }
   .banner {
@@ -115,8 +125,10 @@ div {
     div {
       width: 44px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       span {
+        display: block;
         margin: 5px 0;
       }
     }
@@ -162,17 +174,24 @@ div {
     }
   }
   .new-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 100px;
     div {
+      justify-content: center;
       width: 100px;
-      height: 100px;
+      padding: 15px;
+      span {
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
     }
   }
-  .product{
-    ul{
-      li{
-        img{
+  .product {
+    ul {
+      li {
+        img {
           width: 200px;
           height: 200px;
         }
