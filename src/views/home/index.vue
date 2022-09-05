@@ -75,41 +75,54 @@
     <!-- 专题精选 -->
     <div class="topicList">
       <div class="topicList-top">
-        专题精选
-        <van-icon name="play-circle-o" size="30" style="margin-left: 10px" />
+        <span> 专题精选 </span>
+        <van-icon name="play-circle-o" size="25" />
       </div>
       <ul>
         <li v-for="item in dataInfo.topicList" :key="item.id">
           <img :src="item.item_pic_url" alt="" />
           <div>
             <span class="title">{{ item.title }}</span>
-            <span class="price">{{ item.price_info }}</span>
+            <span class="price">{{ item.price_info }}元起</span>
           </div>
           <p>{{ item.subtitle }}</p>
         </li>
       </ul>
     </div>
+    <!-- newCategoryList 9个商品列表页 -->
+    <div>
+      <!-- <common :parentData="dataInfo"></common>
+      <router-view></router-view> -->
+    </div>
+
     <!-- 空的占位的,避免app.vue中遮挡内容 -->
     <div class="taber-kong"></div>
   </div>
 </template>
 
 <script>
+import common from "./common/index.vue";
 import { index } from "@/api/home"; // home路径下写的 index.js 可以省略
+import Home from "../Home.vue";
 export default {
   data() {
     return {
       dataInfo: "",
     };
   },
+  components: {
+    common,
+    Home,
+  },
 
-  created() {
-    index()
+   async created() {
+    const { data:{newCategoryList}} =await index()
+    console.log(newCategoryList);
       // home下的 index.js 文件中封装的 index 方法 必须 return 出去后; 这里才可以使用 .then 方法
-      .then((res) => {
-        console.log(res);
-        this.dataInfo = res;
-      });
+      // .then((res) => {
+      //   console.log(res.data);
+      //   this.dataInfo = res.data;
+      // });
   },
 
   methods: {
@@ -353,15 +366,23 @@ div {
     height: auto;
     .topicList-top {
       display: flex;
+      flex-wrap: nowrap;
       align-items: center;
-      margin: 20px 50px;
+      margin: 20px 500px;
+      span{
+        width: 50px;
+      }
     }
     ul {
+      width: 360px;
+      height: 200px;
+      overflow: auto;
+      height: auto;
       display: flex;
       float: left;
       :last-child {
         margin-right: 0;
-        p{
+        p {
           width: 300px;
           overflow: hidden;
           white-space: nowrap;
@@ -372,7 +393,7 @@ div {
         position: relative;
         height: 300px;
         margin-right: 20px;
-        
+
         img {
           width: 350px;
           height: 200px;

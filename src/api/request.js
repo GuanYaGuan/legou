@@ -42,7 +42,7 @@ instance.interceptors.response.use(response => {
     loading.clear();
     
     // 返回的数据当中 我们只需要数据当中的 data 数据
-    return response.data;
+    return response;
 
 }, err => {
     loading.close();
