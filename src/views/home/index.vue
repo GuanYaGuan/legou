@@ -36,9 +36,10 @@
     </div>
     <!-- 新品首发 -->
     <div class="new-title">
+      <img src="@/assets/bgcoimge/new.png" alt="" />
       <div>
         <span>新品首发</span>
-        <span>查看全部</span>
+        <span class="bgocolor">查看全部</span>
       </div>
     </div>
     <!-- 新品首发的产品列 -->
@@ -48,10 +49,48 @@
           <img :src="item.list_pic_url" alt="" />
           <p class="name">{{ item.name }}</p>
           <p class="desc">{{ item.goods_brief }}</p>
-          <p class="price">{{ item.retail_price }}</p>
+          <span class="price">{{ item.retail_price }}</span>
         </li>
       </ul>
     </div>
+    <!-- 好物精选 -->
+    <div class="good-title">
+      <img src="@/assets/bgcoimge/new.png" alt="" />
+      <div>
+        <span>人气推荐好物精选</span>
+        <span class="bgocolor">查看全部</span>
+      </div>
+    </div>
+    <!--  -->
+    <div class="hotGoods">
+      <ul>
+        <li v-for="item in dataInfo.hotGoods" :key="item.id">
+          <img :src="item.list_pic_url" alt="" />
+          <p class="name">{{ item.name }}</p>
+          <p class="goods_brief">{{ item.goods_brief }}</p>
+          <span class="price">{{ item.retail_price }}</span>
+        </li>
+      </ul>
+    </div>
+    <!-- 专题精选 -->
+    <div class="topicList">
+      <div class="topicList-top">
+        专题精选
+        <van-icon name="play-circle-o" size="30" style="margin-left: 10px" />
+      </div>
+      <ul>
+        <li v-for="item in dataInfo.topicList" :key="item.id">
+          <img :src="item.item_pic_url" alt="" />
+          <div>
+            <span class="title">{{ item.title }}</span>
+            <span class="price">{{ item.price_info }}</span>
+          </div>
+          <p>{{ item.subtitle }}</p>
+        </li>
+      </ul>
+    </div>
+    <!-- 空的占位的,避免app.vue中遮挡内容 -->
+    <div class="taber-kong"></div>
   </div>
 </template>
 
@@ -174,29 +213,194 @@ div {
     }
   }
   .new-title {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      z-index: -3;
+    }
     div {
       justify-content: center;
       width: 100px;
       padding: 15px;
+      font-size: 16px;
+      color: #8c9bae;
       span {
-        font-size: 16px;
         margin-bottom: 10px;
+      }
+      .bgocolor {
+        text-align: center;
+        width: 80px;
+        height: 30px;
+        background-color: #d8e4f0;
       }
     }
   }
   .product {
+    width: 100%;
+    display: flex;
+    justify-content: center;
     ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       li {
+        position: relative;
+        float: left;
+        margin: 5px;
+        p {
+          position: relative;
+          width: 100px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          top: -20px;
+          margin: 0 auto;
+        }
         img {
-          width: 200px;
-          height: 200px;
+          width: 150px;
+          height: 150px;
+        }
+        .price {
+          position: absolute;
+          font-size: 16px;
+          left: 26px;
+          bottom: 0;
         }
       }
     }
+  }
+  .good-title {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      z-index: -3;
+    }
+    div {
+      justify-content: center;
+      width: 100px;
+      padding: 15px;
+      font-size: 16px;
+      color: #8c9bae;
+      span {
+        margin-bottom: 10px;
+      }
+      .bgocolor {
+        text-align: center;
+        width: 80px;
+        height: 30px;
+        background-color: #d8e4f0;
+      }
+    }
+  }
+  .hotGoods {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      width: 800px;
+      justify-content: space-around;
+      li {
+        position: relative;
+        float: left;
+        margin: 5px;
+        p {
+          position: relative;
+          width: 85px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          top: -20px;
+          margin: 0 auto;
+        }
+        img {
+          width: 150px;
+          height: 150px;
+        }
+        .price {
+          position: absolute;
+          font-size: 16px;
+          left: 35px;
+          bottom: 0;
+        }
+      }
+    }
+  }
+  .topicList {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    .topicList-top {
+      display: flex;
+      align-items: center;
+      margin: 20px 50px;
+    }
+    ul {
+      display: flex;
+      float: left;
+      :last-child {
+        margin-right: 0;
+        p{
+          width: 300px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+      li {
+        position: relative;
+        height: 300px;
+        margin-right: 20px;
+        
+        img {
+          width: 350px;
+          height: 200px;
+        }
+        div {
+          margin-top: 10px;
+          display: flex;
+          justify-content: space-between;
+          .title {
+            font-size: 16px;
+            font-weight: 700;
+          }
+          .price {
+            font-size: 16px;
+            color: #9c3232;
+          }
+        }
+        p {
+          position: absolute;
+          left: 0;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+  .taber-kong {
+    width: 100%;
+    height: 50px;
   }
 }
 </style>
