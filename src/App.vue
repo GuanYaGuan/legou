@@ -22,10 +22,22 @@ export default {
       isShow: true,
     };
   },
+  // 这个项目不做登录页面 因为没有登录等相关的接口;  我们会在 本地存储一个 对象信息
+  created() {
+    var userInfo = {
+      openId: "19513351429",
+      nickName: "赵六",
+      avatarUrl:
+        "https://ts1.cn.mm.bing.net/th?id=OIP-C.EDFxoFWjEClOj5hNL6qFkQAAAA&w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2",
+    };
+    var openId = userInfo.openId;
+    localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    localStorage.setItem("openId", openId);
+  },
   // 监听页面路由的变化, 反向思维, 要去的路由路径在 以下 数组路径 当中 存在 就为 true
   watch: {
     $route(to, from) {
-      var arr=["/home","/topic","/classify","/car","/my"]
+      var arr = ["/home", "/topic", "/classify", "/car", "/my"];
       if (arr.includes(to.path)) {
         this.isShow = true;
       } else {
@@ -45,5 +57,4 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
 </style>

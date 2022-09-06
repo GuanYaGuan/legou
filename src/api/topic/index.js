@@ -6,7 +6,7 @@ function  topic(data){
     return request({
         method:"get",
         url:"/topic/listaction",
-        data
+        params:data
     })
 }
 

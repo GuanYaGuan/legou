@@ -1,13 +1,28 @@
 <template>
   <div>
-    <ul id="topic-box">
+    <!-- <ul id="topic-box">
       <li v-for="(item, index) in dataInfo.data" :key="index">
         <img :src="item.scene_pic_url" alt="" />
         <p class="title">{{ item.title }}</p>
         <p class="desc">{{ item.subtitle }}</p>
         <span class="price">{{ item.price_info }}元起</span>
       </li>
-    </ul>
+    </ul> -->
+    <van-list
+      v-model="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="onLoad"
+    >
+      <ul id="topic-box">
+        <li v-for="(item, index) in dataInfo.data" :key="index">
+          <img :src="item.scene_pic_url" alt="" />
+          <p class="title">{{ item.title }}</p>
+          <p class="desc">{{ item.subtitle }}</p>
+          <span class="price">{{ item.price_info }}元起</span>
+        </li>
+      </ul>
+    </van-list>
   </div>
 </template>
 
@@ -18,6 +33,8 @@ export default {
   data() {
     return {
       dataInfo: "",
+      loading: false,
+      finished: false,
     };
   },
 
@@ -29,11 +46,11 @@ export default {
       this.dataInfo = res.data;
     });
   },
-  mounted() {
-
-  },
+  mounted() {},
   methods: {
-  
+    onLoad() {
+      
+    },
   },
 };
 </script>

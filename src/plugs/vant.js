@@ -14,7 +14,9 @@ import {
     Checkbox, 
     CheckboxGroup,
     Grid, 
-    GridItem
+    GridItem,
+    NavBar,
+    List,
 } from 'vant'
 
 Vue.use(Tabbar);
@@ -31,3 +33,5 @@ Vue.use(Checkbox);
 Vue.use(CheckboxGroup);
 Vue.use(Grid);
 Vue.use(GridItem);
+Vue.use(NavBar);
+Vue.use(List);

@@ -124,7 +124,7 @@ export default {
     index()
       // home下的 index.js 文件中封装的 index 方法 必须 return 出去后; 这里才可以使用 .then 方法
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.dataInfo = res.data;
       });
   },
