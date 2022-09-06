@@ -115,14 +115,16 @@ export default {
     Home,
   },
 
-   async created() {
-    const { data:{newCategoryList}} =await index()
-    console.log(newCategoryList);
+  async created() {
+    // const { data:{newCategoryList,}} =await index()
+    // console.log(newCategoryList);
+    // this.dataInfo=newCategoryList;
+    index()
       // home下的 index.js 文件中封装的 index 方法 必须 return 出去后; 这里才可以使用 .then 方法
-      // .then((res) => {
-      //   console.log(res.data);
-      //   this.dataInfo = res.data;
-      // });
+      .then((res) => {
+        console.log(res.data);
+        this.dataInfo = res.data;
+      });
   },
 
   methods: {
@@ -369,7 +371,7 @@ div {
       flex-wrap: nowrap;
       align-items: center;
       margin: 20px 500px;
-      span{
+      span {
         width: 50px;
       }
     }
