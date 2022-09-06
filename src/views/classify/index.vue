@@ -2,7 +2,7 @@
   <div>
     <van-search placeholder="商品搜索" input-align="center" />
     <van-tree-select
-      height="110vw"
+      height="115vw"
       :items="items"
       :main-active-index.sync="active"
     >
@@ -14,6 +14,34 @@
         <van-image
           v-if="active === 1"
           src="https://img01.yzcdn.cn/vant/apple-2.jpg"
+        />
+        <van-image
+          v-if="active === 2"
+          src="https://img01.yzcdn.cn/vant/apple-1.jpg"
+        />
+        <van-image
+          v-if="active === 3"
+          src="https://img01.yzcdn.cn/vant/apple-2.jpg"
+        />
+        <van-image
+          v-if="active === 4"
+          src="https://img01.yzcdn.cn/vant/apple-1.jpg"
+        />
+        <van-image
+          v-if="active === 5"
+          src="https://img01.yzcdn.cn/vant/apple-2.jpg"
+        />
+        <van-image
+          v-if="active === 6"
+          src="https://img01.yzcdn.cn/vant/apple-1.jpg"
+        />
+        <van-image
+          v-if="active === 7"
+          src="https://img01.yzcdn.cn/vant/apple-2.jpg"
+        />
+        <van-image
+          v-if="active === 8"
+          src="https://img01.yzcdn.cn/vant/apple-1.jpg"
         />
       </template>
     </van-tree-select>

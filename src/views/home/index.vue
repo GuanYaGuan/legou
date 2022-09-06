@@ -57,7 +57,9 @@
     <div class="good-title">
       <img src="@/assets/bgcoimge/new.png" alt="" />
       <div>
-        <span>人气推荐好物精选</span>
+        <span>人气推荐</span>
+        <span class="circle">.</span>
+        <span>好物精选</span>
         <span class="bgocolor">查看全部</span>
       </div>
     </div>
@@ -115,7 +117,7 @@ export default {
     Home,
   },
 
-  async created() {
+  created() {
     // const { data:{newCategoryList,}} =await index()
     // console.log(newCategoryList);
     // this.dataInfo=newCategoryList;
@@ -308,10 +310,16 @@ div {
     }
     div {
       justify-content: center;
-      width: 100px;
       padding: 15px;
       font-size: 16px;
       color: #8c9bae;
+      width: 200px;
+      float: left;
+      .circle{
+        line-height: 8px;
+        font-size: 30px;
+        margin: 0 5px;
+      }
       span {
         margin-bottom: 10px;
       }
@@ -334,6 +342,9 @@ div {
       flex-wrap: wrap;
       width: 800px;
       justify-content: space-around;
+      :last-child{
+        margin-right: 50%;
+      }
       li {
         position: relative;
         float: left;
@@ -376,7 +387,7 @@ div {
       }
     }
     ul {
-      width: 360px;
+      width: 300px;
       height: 200px;
       overflow: auto;
       height: auto;

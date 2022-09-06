@@ -1,14 +1,15 @@
 import request from "@/api/request.js"
 
 
-function index() {
+// 请求专题页面数据
+function  topic(data){
     return request({
-        method: 'get',
-        url: '/bufan/topic/listaction',
+        method:"get",
+        url:"/topic/listaction",
+        data
     })
 }
 
-
 export {
-    index
+    topic,
 }
