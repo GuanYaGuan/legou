@@ -1,10 +1,6 @@
 <template>
   <div>
-    <div
-      class="big-goodList"
-      v-for="(item, index) in parentData.newCategoryList"
-      :key="index"
-    >
+    <div class="big-goodList">
       <!-- <div class="goodList" v-for="(good, index) in item" :key="index">
         <div class="name">{{ good.name }}</div>
         <div class="gooditem" v-for="gooditem in good" :key="gooditem.id">
@@ -22,11 +18,13 @@ export default {
   name: "LegouIndex",
 
   data() {
-    return {};
+    return {
+    };
   },
   props: ["parentData"],
 
-  created() {},
+  created() {
+  },
 
   methods: {},
 };

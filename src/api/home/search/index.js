@@ -5,7 +5,7 @@ import request from "@/api/request.js"
 function  keywords(data){
     return request({
         method:"get",
-        url:"/bufan/search/indexaction",
+        url:"/search/indexaction",
         params:data
     })
 }

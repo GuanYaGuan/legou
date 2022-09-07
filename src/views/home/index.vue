@@ -55,7 +55,7 @@
     </div>
     <!-- 好物精选 -->
     <div class="good-title">
-      <img src="@/assets/bgcoimge/new.png" alt="" />
+      <img src="@/assets/bgcoimge/new2.png" alt="" />
       <div>
         <span>人气推荐</span>
         <span class="circle">.</span>
@@ -93,8 +93,8 @@
     </div>
     <!-- newCategoryList 9个商品列表页 -->
     <div>
-      <!-- <common :parentData="dataInfo"></common>
-      <router-view></router-view> -->
+      <common :parentData="dataInfo"></common>
+      <router-view></router-view>
     </div>
 
     <!-- 空的占位的,避免app.vue中遮挡内容 -->
@@ -327,7 +327,7 @@ div {
         text-align: center;
         width: 80px;
         height: 30px;
-        background-color: #d8e4f0;
+        background-color: #f4e9cb;
       }
     }
   }

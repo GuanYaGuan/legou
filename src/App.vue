@@ -26,7 +26,7 @@ export default {
   created() {
     var userInfo = {
       openId: "19513351429",
-      nickName: "赵六",
+      nickName: "罐丫罐",
       avatarUrl:
         "https://ts1.cn.mm.bing.net/th?id=OIP-C.EDFxoFWjEClOj5hNL6qFkQAAAA&w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2",
     };
