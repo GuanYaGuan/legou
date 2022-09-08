@@ -12,7 +12,6 @@
         show-action
         placeholder="请输入搜索关键词"
         @input="iptEvent"
-
       />
     </form>
     <!-- 默认部分 搜索页的历史记录和关键词 -->
@@ -57,6 +56,17 @@
     </div>
     <!-- 点击搜索提示所对应的商品, 商品页面 -->
     <div class="goods" v-else>
+      <div class="goodsNav">
+        <span>综合</span>
+        <div class="price"  @click="setcolor">
+          <span>价格</span>
+          <span class="arror">
+            <van-icon name="arrow-up" />
+            <van-icon name="arrow-down" />
+          </span>
+        </div>
+        <span>分类</span>
+      </div>
       <div class="goodsBox" v-for="item in goodsList" :key="item.id">
         <img :src="item.list_pic_url" alt="" />
         <p class="name">{{ item.name }}</p>
@@ -151,7 +161,8 @@ export default {
         openId: localStorage.getItem("openId"),
       });
     },
-
+    // 点击改变箭头的颜色
+    setcolor() {},
   },
 };
 </script>
@@ -225,14 +236,37 @@ div {
     }
   }
   .goods {
+    .goodsNav {
+      position: relative;
+      border-bottom: 1px solid #d9d9d9;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      span {
+        line-height: 40px;
+        font-size: 14px;
+      }
+      .price {
+        display: flex;
+        justify-content: center;
+        .arror {
+          position: absolute;
+          left: 55%;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 1px;
+          font-size: 1px;
+          display: flex;
+          flex-wrap: wrap;
+        }
+      }
+    }
     .goodsBox {
       width: 50%;
       border-right: 1px solid #d9d9d9;
       img {
         width: 150px;
         height: 150px;
-      }
-      p {
       }
     }
   }
