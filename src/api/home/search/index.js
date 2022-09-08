@@ -9,7 +9,33 @@ function  keywords(data){
         params:data
     })
 }
-
+// 搜索提示请求接口
+function  searchTip(data){
+    return request({
+        method:"get",
+        url:"/search/helperaction",
+        params:data
+    })
+}
+// 添加搜索记录请求接口
+function  addHistory(data){
+    return request({
+        method:"post",
+        url:"/search/addhistoryaction",
+        data
+    })
+}
+// 删除历史记录
+function  delHistory(data){
+    return request({
+        method:"post",
+        url:"/search/clearhistoryAction",
+        data
+    })
+}
 export {
     keywords,
+    searchTip,
+    addHistory,
+    delHistory
 }
