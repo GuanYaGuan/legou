@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="homebody">
     <!-- 导航栏 -->
     <div class="nav">
       <van-icon size="20" name="location-o" />
@@ -23,6 +23,7 @@
         <span>{{ item.name }}</span>
       </div>
     </div>
+
     <!-- 品牌制造商直供 -->
     <p>品牌制造商直供</p>
     <div class="brand">
@@ -39,7 +40,7 @@
       <img src="@/assets/bgcoimge/new.png" alt="" />
       <div>
         <span>新品首发</span>
-        <span class="bgocolor">查看全部</span>
+        <span class="bgocolor"> <span>查看全部</span> </span>
       </div>
     </div>
     <!-- 新品首发的产品列 -->
@@ -49,7 +50,7 @@
           <img :src="item.list_pic_url" alt="" />
           <p class="name">{{ item.name }}</p>
           <p class="desc">{{ item.goods_brief }}</p>
-          <span class="price">{{ item.retail_price }}</span>
+          <span class="price">￥{{ item.retail_price }}</span>
         </li>
       </ul>
     </div>
@@ -60,7 +61,7 @@
         <span>人气推荐</span>
         <span class="circle">.</span>
         <span>好物精选</span>
-        <span class="bgocolor">查看全部</span>
+        <span class="bgocolor"> <span>查看全部</span></span>
       </div>
     </div>
     <!--  -->
@@ -70,7 +71,7 @@
           <img :src="item.list_pic_url" alt="" />
           <p class="name">{{ item.name }}</p>
           <p class="goods_brief">{{ item.goods_brief }}</p>
-          <span class="price">{{ item.retail_price }}</span>
+          <span class="price">￥{{ item.retail_price }}</span>
         </li>
       </ul>
     </div>
@@ -143,6 +144,7 @@ div {
   display: flex;
   flex-wrap: wrap;
   text-align: center;
+  background-color: #f7f8f944;
   .nav {
     display: flex;
     align-items: center;
@@ -257,6 +259,10 @@ div {
         width: 80px;
         height: 30px;
         background-color: #d8e4f0;
+        span {
+          display: block;
+          margin-top: 4px;
+        }
       }
     }
   }
@@ -268,6 +274,7 @@ div {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      margin: 10px auto;
       li {
         position: relative;
         float: left;
@@ -281,6 +288,9 @@ div {
           top: -20px;
           margin: 0 auto;
         }
+        .desc {
+          color: #8c9bae;
+        }
         img {
           width: 150px;
           height: 150px;
@@ -290,6 +300,7 @@ div {
           font-size: 16px;
           left: 26px;
           bottom: 0;
+          color: #9c3232;
         }
       }
     }
@@ -315,7 +326,7 @@ div {
       color: #8c9bae;
       width: 200px;
       float: left;
-      .circle{
+      .circle {
         line-height: 8px;
         font-size: 30px;
         margin: 0 5px;
@@ -328,6 +339,10 @@ div {
         width: 80px;
         height: 30px;
         background-color: #f4e9cb;
+        span {
+          display: block;
+          margin-top: 4px;
+        }
       }
     }
   }
@@ -342,7 +357,8 @@ div {
       flex-wrap: wrap;
       width: 800px;
       justify-content: space-around;
-      :last-child{
+      margin: 10px auto;
+      :last-child {
         margin-right: 50%;
       }
       li {
@@ -358,6 +374,9 @@ div {
           top: -20px;
           margin: 0 auto;
         }
+        .goods_brief {
+          color: #8c9bae;
+        }
         img {
           width: 150px;
           height: 150px;
@@ -367,6 +386,7 @@ div {
           font-size: 16px;
           left: 35px;
           bottom: 0;
+          color: #9c3232;
         }
       }
     }
