@@ -18,7 +18,7 @@
     </div>
     <!-- 居中描述 -->
     <div class="channel">
-      <div v-for="item in dataInfo.channel" :key="item.id">
+      <div v-for="item in dataInfo.channel" :key="item.id" @click="channeldetail">
         <img :src="item.icon_url" alt="" />
         <span>{{ item.name }}</span>
       </div>
@@ -135,6 +135,10 @@ export default {
     openSearch() {
       this.$router.push("/home/search");
     },
+    // 点击跳转到 channel 详情页面
+    channeldetail(){
+      this.$router.push("/home/channeldetail");
+    }
   },
 };
 </script>

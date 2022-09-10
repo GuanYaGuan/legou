@@ -16,6 +16,8 @@ import {
     GridItem,
     NavBar,
     List,
+    Tab, 
+    Tabs
 } from 'vant'
 
 Vue.use(Tabbar);
@@ -34,3 +36,5 @@ Vue.use(Grid);
 Vue.use(GridItem);
 Vue.use(NavBar);
 Vue.use(List);
+Vue.use(Tab);
+Vue.use(Tabs);

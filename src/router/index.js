@@ -47,6 +47,11 @@ const routes = [
     path:'/home/search',
     name:'search',
     component:()=>import("../views/home/search/index.vue")
+  },
+  {
+    path:'/home/channeldetail',
+    name:'channeldetail',
+    component:()=>import('../views/home/channeldetail/index.vue')
   }
 ]
 

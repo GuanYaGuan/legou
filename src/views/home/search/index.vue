@@ -24,7 +24,7 @@
         <div class="desc" v-show="isshow">
           <ul>
             <li v-for="(item, index) in dataList.historyData" :key="index">
-              <span>{{ item.keyword }}</span>
+              <span @click="openGoods(item.keyword)">{{ item.keyword }}</span>
             </li>
           </ul>
         </div>
@@ -58,7 +58,7 @@
     <div class="goods" v-else>
       <div class="goodsNav">
         <span>综合</span>
-        <div class="price"  @click="setcolor">
+        <div class="price" @click="setcolor">
           <span>价格</span>
           <span class="arror">
             <van-icon name="arrow-up" />
@@ -163,6 +163,18 @@ export default {
     },
     // 点击改变箭头的颜色
     setcolor() {},
+    // 点击历史记录打开详情
+    openGoods(val) {
+      this.current = "goods";
+      searchTip({
+        keyword: val,
+        // 没有传递一个空的字符
+        order: "",
+      }).then((res) => {
+        // console.log(res);
+        this.goodsList = res.data.keywords;
+      });
+    },
   },
 };
 </script>

@@ -31,7 +31,8 @@ export default {
   props: ["parentData"],
   watch: {
     parentData() {
-      console.log(this.parentData);
+      // 打印传递过来的数据
+      // console.log(this.parentData);
     },
   },
   created() {},
