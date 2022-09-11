@@ -1,21 +1,17 @@
 <template>
   <div>
-    <!-- <ul id="topic-box">
-      <li v-for="(item, index) in dataInfo.data" :key="index">
-        <img :src="item.scene_pic_url" alt="" />
-        <p class="title">{{ item.title }}</p>
-        <p class="desc">{{ item.subtitle }}</p>
-        <span class="price">{{ item.price_info }}元起</span>
-      </li>
-    </ul> -->
+    <!-- v-model 加载状态 -->
+    <!-- finished 是否已经加载完成 -->
+    <!-- load 用于请求下一页数据 -->
     <van-list
       v-model="loading"
       :finished="finished"
+      :immediate-check="false"
       finished-text="没有更多了"
       @load="onLoad"
     >
       <ul id="topic-box">
-        <li v-for="(item, index) in dataInfo.data" :key="index">
+        <li v-for="item in list" :key="item.id">
           <img :src="item.scene_pic_url" alt="" />
           <p class="title">{{ item.title }}</p>
           <p class="desc">{{ item.subtitle }}</p>
@@ -32,24 +28,38 @@ import { topic } from "@/api/topic";
 export default {
   data() {
     return {
-      dataInfo: "",
+      list:[],
       loading: false,
       finished: false,
+      start: 1,
     };
   },
 
   created() {
-    topic({
-      page: 1,
-    }).then((res) => {
-      console.log(res.data);
-      this.dataInfo = res.data;
-    });
+    this.init();
   },
   mounted() {},
   methods: {
+    // 请求下一页数据
     onLoad() {
-      
+      // console.log("到底了");
+      this.start++;
+      this.init();
+    },
+    // 初始化数据
+    init() {
+      topic({
+        page: this.start,
+      }).then(res => {
+        console.log(res.data);
+        this.list.push(...res.data.data);
+        // 当数据请求完毕  变更加载状态
+        this.loading = false;
+        // 请求到最后一页数据之后 终止请求操作 禁止 load 加载状态
+        if (this.start >= res.data.total) {
+          this.finished = true;
+        }
+      });
     },
   },
 };

@@ -36,7 +36,9 @@
         <div class="desc">
           <ul>
             <li v-for="(item, index) in dataList.hotKeywordList" :key="index">
-              <span>{{ item.keyword }}</span>
+              <span @click="keywordsList(item.keyword)">{{
+                item.keyword
+              }}</span>
             </li>
           </ul>
         </div>
@@ -163,6 +165,18 @@ export default {
     },
     // 点击改变箭头的颜色
     setcolor() {},
+    // 点击 关键词打开商品详情
+    keywordsList(val) {
+      this.current = "goods";
+      searchTip({
+        keyword: val,
+        // 没有传递一个空的字符
+        order: "",
+      }).then((res) => {
+        // console.log(res);
+        this.goodsList = res.data.keywords;
+      });
+    },
     // 点击历史记录打开详情
     openGoods(val) {
       this.current = "goods";
