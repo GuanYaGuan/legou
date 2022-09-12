@@ -54,7 +54,7 @@
     <!-- 新品首发的产品列 -->
     <div class="product">
       <ul>
-        <li v-for="item in dataInfo.newGoods" :key="item.id">
+        <li v-for="item in dataInfo.newGoods" :key="item.id" @click="opendetail">
           <img :src="item.list_pic_url" alt="" />
           <p class="name">{{ item.name }}</p>
           <p class="desc">{{ item.goods_brief }}</p>
@@ -148,7 +148,7 @@ export default {
       this.$router.push({
         name:'channeldetail',
         params:{
-          id:val
+          id:val,
         }
         });
     },
@@ -161,6 +161,10 @@ export default {
         },
       });
     },
+    // 点击跳转至商品详情页面
+    opendetail(){
+      this.$router.push('/home/detailsPage')
+    }
   },
 };
 </script>

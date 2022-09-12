@@ -6,9 +6,8 @@
       left-arrow
       @click-left="onClickLeft"
     />
-    <van-tabs @click="sendId">
-      <van-tab v-for="item in categoryNav" :key="item.id" :name="item.id">
-        <template #title> {{ item.name }}</template>
+    <van-tabs @click="sendId" v-model="active">
+      <van-tab v-for="item in categoryNav.navData" :key="item.id" :title="item.name" :name="item.id" >
         <div class="header">
           <p class="title">{{ item.name }}</p>
           <p class="desc">{{ item.front_desc }}</p>
@@ -36,6 +35,7 @@ export default {
     return {
       categoryNav: {},
       goodsList: {},
+      active:this.$route.params.id
     };
   },
 
@@ -44,16 +44,11 @@ export default {
     categoryNav({
       id: this.$route.params.id,
     }).then((res) => {
-      // console.log(...res.data.navData);
-      this.categoryNav = res.data.navData;
+      // console.log(res.data);
+      this.categoryNav = res.data;
     });
 
-    goodsList({
-      categoryId: this.$route.params.id,
-    }).then((res) => {
-      console.log(res.data.data);
-      this.goodsList = res.data.data;
-    });
+    this.channelInit(this.$route.params.id)
   },
 
   methods: {
@@ -62,7 +57,16 @@ export default {
     },
     sendId(name) {
       // console.log(name);
-      this.name = name;
+      this.channelInit(name);
+    },
+    // 初始化 请求
+    channelInit(val) {
+      return goodsList({
+        categoryId: val,
+      }).then((res) => {
+        // console.log(res.data.data);
+        this.goodsList = res.data.data;
+      });
     },
   },
 };

@@ -57,6 +57,16 @@ const routes = [
     path:'/home/clickbrand',
     name:'clickbrand',
     component:()=>import('../views/home/clickbrand/index.vue')
+  },
+  {
+    path:'/home/detailsPage',
+    name:'detailsPage',
+    component:()=>import('../views/home/detailsPage/index.vue')
+  },
+  {
+    path:'/home/newgoods',
+    name:'newgoods',
+    component:()=>import('../views/home/newgoods/index.vue')
   }
 ]
 
