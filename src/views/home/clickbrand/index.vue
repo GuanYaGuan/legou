@@ -21,13 +21,11 @@
       <div class="item" v-for="item in brandList.goodsList" :key="item.id">
         <img :src="item.list_pic_url" alt="" />
         <p class="name">{{ item.name }}</p>
-        <p class="price">{{ item.retail_price }}</p>
+        <p class="price">￥{{ item.retail_price }}</p>
       </div>
     </div>
     <!-- 没有商品是显示 -->
-    <div class="brandTip" v-else>
-      <p>数据库暂无数据</p>
-    </div>
+    <div class="brandTip" v-else>数据库暂无数据...</div>
   </div>
 </template>
 
@@ -45,9 +43,6 @@ export default {
 
   created() {
     this.init();
-    if (this.brandList.goodsList == []) {
-      this.isshow = false;
-    }
   },
 
   methods: {
@@ -60,17 +55,27 @@ export default {
       detailaction({
         id: this.$route.params.id,
       }).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.brandList = res.data;
       });
     },
     // 放置页面刷新之后不渲染数据将传递的参数信息保存
+  },
+  // 监听数据
+  watch: {
+    "brandList.goodsList": function (val) {
+      if (val == "undefinded" || val.length <= 0) {
+        // console.log("数据为空");
+        this.isshow = false;
+      }
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 div {
+  height: 100%;
   div {
     .header {
       position: relative;
@@ -97,13 +102,12 @@ div {
     }
   }
   .brandList {
-    height: 100%;
     width: 100%;
-    background-color: rgba(102, 102, 102, 0.121);
-    padding-top: 10px;
+    padding-top: 5px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    background-color: rgba(102, 102, 102, 0.121);
     .item {
       width: 185px;
       background-color: #fff;
@@ -112,15 +116,26 @@ div {
         width: 167px;
         height: 167px;
       }
+      .name {
+        margin: 5px 0 5px 0;
+        text-align: center;
+        font-size: 12px;
+      }
+      .price{
+        font-size: 14px;
+        color: #b4282d;
+      }
     }
   }
   .brandTip {
     width: 100%;
-    height: 100%;
+    height: 310px;
     background-color: rgba(102, 102, 102, 0.121);
-    p {
-      font-size: 20px;
-    }
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #999;
   }
 }
 </style>
