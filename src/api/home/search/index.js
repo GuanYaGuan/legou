@@ -22,7 +22,7 @@ function  addHistory(data){
     return request({
         method:"post",
         url:"/search/addhistoryaction",
-        data
+        params:data
     })
 }
 // 删除历史记录
@@ -30,7 +30,7 @@ function  delHistory(data){
     return request({
         method:"post",
         url:"/search/clearhistoryAction",
-        data
+        params:data
     })
 }
 export {

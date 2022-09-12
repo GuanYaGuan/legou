@@ -18,7 +18,11 @@
     </div>
     <!-- 居中描述 -->
     <div class="channel">
-      <div v-for="item in dataInfo.channel" :key="item.id" @click="channeldetail">
+      <div
+        v-for="item in dataInfo.channel"
+        :key="item.id"
+        @click="channeldetail"
+      >
         <img :src="item.icon_url" alt="" />
         <span>{{ item.name }}</span>
       </div>
@@ -28,7 +32,11 @@
     <p>品牌制造商直供</p>
     <div class="brand">
       <div>
-        <div v-for="item in dataInfo.brandList" :key="item.id">
+        <div
+          v-for="item in dataInfo.brandList"
+          :key="item.id"
+          @click="clickbrand(item.id)"
+        >
           <span class="name">{{ item.name }}</span>
           <span class="price">{{ item.floor_price }}</span>
           <img :src="item.new_pic_url" alt="" />
@@ -136,9 +144,18 @@ export default {
       this.$router.push("/home/search");
     },
     // 点击跳转到 channel 详情页面
-    channeldetail(){
+    channeldetail() {
       this.$router.push("/home/channeldetail");
-    }
+    },
+    // 点击品牌制造商直供跳转
+    clickbrand(val) {
+      this.$router.push({
+        name: "clickbrand",
+        params: {
+          id: val,
+        },
+      });
+    },
   },
 };
 </script>

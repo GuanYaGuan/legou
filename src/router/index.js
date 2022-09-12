@@ -52,6 +52,11 @@ const routes = [
     path:'/home/channeldetail',
     name:'channeldetail',
     component:()=>import('../views/home/channeldetail/index.vue')
+  },
+  {
+    path:'/home/clickbrand',
+    name:'clickbrand',
+    component:()=>import('../views/home/clickbrand/index.vue')
   }
 ]
 
