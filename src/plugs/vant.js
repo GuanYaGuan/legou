@@ -17,7 +17,7 @@ import {
     NavBar,
     List,
     Tab, 
-    Tabs
+    Tabs,
 } from 'vant'
 
 Vue.use(Tabbar);

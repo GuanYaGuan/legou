@@ -21,7 +21,7 @@
       <div
         v-for="item in dataInfo.channel"
         :key="item.id"
-        @click="channeldetail"
+        @click="channeldetail(item.id)"
       >
         <img :src="item.icon_url" alt="" />
         <span>{{ item.name }}</span>
@@ -144,8 +144,13 @@ export default {
       this.$router.push("/home/search");
     },
     // 点击跳转到 channel 详情页面
-    channeldetail() {
-      this.$router.push("/home/channeldetail");
+    channeldetail(val) {
+      this.$router.push({
+        name:'channeldetail',
+        params:{
+          id:val
+        }
+        });
     },
     // 点击品牌制造商直供跳转
     clickbrand(val) {
