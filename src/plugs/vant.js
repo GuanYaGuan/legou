@@ -18,6 +18,7 @@ import {
     List,
     Tab, 
     Tabs,
+    Lazyload
 } from 'vant'
 
 Vue.use(Tabbar);
@@ -38,3 +39,4 @@ Vue.use(NavBar);
 Vue.use(List);
 Vue.use(Tab);
 Vue.use(Tabs);
+Vue.use(Lazyload);

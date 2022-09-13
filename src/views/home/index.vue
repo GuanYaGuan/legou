@@ -54,7 +54,11 @@
     <!-- 新品首发的产品列 -->
     <div class="product">
       <ul>
-        <li v-for="item in dataInfo.newGoods" :key="item.id" @click="opendetail">
+        <li
+          v-for="item in dataInfo.newGoods"
+          :key="item.id"
+          @click="opendetail"
+        >
           <img :src="item.list_pic_url" alt="" />
           <p class="name">{{ item.name }}</p>
           <p class="desc">{{ item.goods_brief }}</p>
@@ -63,7 +67,7 @@
       </ul>
     </div>
     <!-- 好物精选 -->
-    <div class="good-title" @click="newgoods">
+    <div class="good-title" @click="hotgoods">
       <img src="@/assets/bgcoimge/new2.png" alt="" />
       <div>
         <span>人气推荐</span>
@@ -146,11 +150,11 @@ export default {
     // 点击跳转到 channel 详情页面
     channeldetail(val) {
       this.$router.push({
-        name:'channeldetail',
-        params:{
-          id:val,
-        }
-        });
+        name: "channeldetail",
+        params: {
+          id: val,
+        },
+      });
     },
     // 点击品牌制造商直供跳转
     clickbrand(val) {
@@ -162,13 +166,27 @@ export default {
       });
     },
     // 点击跳转至商品详情页面
-    opendetail(){
-      this.$router.push('/home/detailsPage')
+    opendetail() {
+      this.$router.push("/home/detailsPage");
     },
     // 点击跳转至新品商品页
-    newgoods(){
-      this.$router.push('/home/newgoods')
-    }
+    newgoods() {
+      this.$router.push({
+        name: "newgoods",
+        params: {
+          isNew: 1,
+        },
+      });
+    },
+    // 点击跳转至好物精选页面
+    hotgoods() {
+      this.$router.push({
+        name: "newgoods",
+        params: {
+          isHot: 1,
+        },
+      });
+    },
   },
 };
 </script>

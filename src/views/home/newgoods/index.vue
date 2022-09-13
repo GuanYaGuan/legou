@@ -42,11 +42,11 @@ export default {
 
   created() {
     isNewHot({
-      isHot: "",
-      isNew: 1,
+      isHot: ""||this.$route.params.isHot,
+      isNew: ""||this.$route.params.isNew,
       order: "",
     }).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       this.newgoods = res.data;
     });
   },

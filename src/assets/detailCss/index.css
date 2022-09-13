@@ -1,0 +1,130 @@
+.detail-box {
+    background-color: rgba(227, 224, 224, 0.2);
+    margin: 0;
+    padding: 0;
+}
+
+.detail-item {
+    background-color: #fff;
+
+}
+
+.detail-item .my-swipe .van-swipe-item img {
+    width: 100%;
+}
+
+.detail-item .worry {
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba(227, 224, 224, 0.2);
+    align-items: center;
+    width: 100%;
+    height: 50px;
+
+}
+
+.detail-item .worry div {
+    display: flex;
+    align-items: center;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+
+}
+
+.worry div .image {
+    display: block;
+    float: left;
+    width: 5px;
+    height: 5px;
+}
+
+.worry div .item {
+    float: left;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #666;
+}
+
+.detail-item .goodsinfo {
+    width: 100%;
+    padding-top: 10px;
+
+}
+
+.goodsinfo .name {
+    line-height: 22px;
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.goodsinfo .desc {
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: #999;
+}
+
+.goodsinfo .price {
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: #b4282d;
+}
+
+.detail-item .section-nav {
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+    padding: 0 25px;
+
+}
+
+.section-nav span {
+    font-size: 12px;
+}
+
+.detail-item .color {
+    height: 10px;
+    background-color: rgba(227, 224, 224, 0.2);
+}
+
+.detail-item .attribute {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+}
+
+.attribute .title {
+    padding-left: 25px;
+    margin-right: 72%;
+    font-size: 18px;
+}
+
+.attribute .item {
+    width: 80%;
+    display: flex;
+    background: #f7f7f7;
+    padding: 5px 0;
+    margin-left: 25px;
+    margin-bottom: 5px;
+    line-height: 20px;
+    font-size: 12px;
+
+}
+
+.attribute .item .name {
+    margin-right: 10px;
+    color: #999;
+}
+
+.detail-item .desc p {
+    margin: 0;
+    padding: 0;
+}
+
+.detail-item .desc img {
+    width: 100%;
+    vertical-align: bottom;
+}
