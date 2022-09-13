@@ -9,7 +9,15 @@ function  topic(data){
         params:data
     })
 }
-
+// 请求分类详情页数据
+function  topicDetail(data){
+    return request({
+        method:"get",
+        url:"/topic/detailaction",
+        params:data
+    })
+}
 export {
     topic,
+    topicDetail
 }

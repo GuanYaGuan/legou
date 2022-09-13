@@ -11,7 +11,7 @@
       @load="onLoad"
     >
       <ul id="topic-box">
-        <li v-for="item in list" :key="item.id">
+        <li v-for="item in list" :key="item.id" @click="opendetails(item.id)">
           <img :src="item.scene_pic_url" alt="" />
           <p class="title">{{ item.title }}</p>
           <p class="desc">{{ item.subtitle }}</p>
@@ -51,7 +51,7 @@ export default {
       topic({
         page: this.start,
       }).then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         this.list.push(...res.data.data);
         // 当数据请求完毕  变更加载状态
         this.loading = false;
@@ -61,6 +61,15 @@ export default {
         }
       });
     },
+    // 点击跳转至详情页面
+    opendetails(val){
+      this.$router.push({
+        name:'topicdetails',
+        params:{
+          id:val
+        }
+        })
+    }
   },
 };
 </script>

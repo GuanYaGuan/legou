@@ -29,7 +29,6 @@
 <script>
 import { categoryNav, goodsList } from "@/api/home/channeldetail";
 export default {
-  name: "LegouIndex",
 
   data() {
     return {

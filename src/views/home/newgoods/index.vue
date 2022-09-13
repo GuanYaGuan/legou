@@ -32,7 +32,6 @@
 <script>
 import { isNewHot } from "@/api/home/goodsList";
 export default {
-  name: "LegouIndex",
 
   data() {
     return {

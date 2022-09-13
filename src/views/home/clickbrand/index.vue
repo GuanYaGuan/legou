@@ -32,7 +32,6 @@
 <script>
 import { detailaction } from "@/api/home/clickbrand";
 export default {
-  name: "LegouIndex",
 
   data() {
     return {

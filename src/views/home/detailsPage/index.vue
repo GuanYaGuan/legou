@@ -120,7 +120,7 @@
 import "@/assets/detailCss/index.css";
 import { goodsDetails } from "@/api/home/detailsPage";
 export default {
-  name: "LegouIndex",
+
 
   data() {
     return {

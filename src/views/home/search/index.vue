@@ -81,7 +81,6 @@
 <script>
 import { keywords, searchTip, addHistory, delHistory } from "@/api/home/search";
 export default {
-  name: "LegouIndex",
 
   data() {
     return {
