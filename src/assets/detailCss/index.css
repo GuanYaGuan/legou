@@ -128,3 +128,75 @@
     width: 100%;
     vertical-align: bottom;
 }
+.detail-item .desc:last-child{
+    margin-bottom: 10px;
+}
+.common-problem{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.item-a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    margin: 15px 0;
+}
+.item-a .line{
+    width: 40px;
+    height: 1px;
+    background-color: #000;
+}
+.item-a span{
+    margin: 0 5px;
+    font-size: 12px;
+}
+.item-b{
+    padding: 0 20px;
+    font-size: 12px;
+    
+}
+.item-b .ques{
+    float: left;
+    margin: 5px 0;
+    line-height: 20px;
+}
+.item-b .answer{
+    float: left;
+    text-align: start;
+    margin-bottom: 5px;
+    line-height: 20px;
+}
+.seeAll{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.seeAll .goodsList{
+    width: 100%;
+}
+.goodsList{
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba(227, 224, 224, 0.2);
+    flex-wrap: wrap;
+}
+.goodsList .item:last-child{
+    margin-right: 50%;
+    margin-bottom: 50px;
+}
+.goodsList .item{
+    width: 180px;
+    background-color: #fff;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.goodsList .item img{
+    width: 167px;
+    height: 167px;
+}
+.goodsList .item .price{
+    color: #b4282d;
+}

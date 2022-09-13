@@ -8,7 +8,11 @@
       >
         <div class="name">{{ good.name }}</div>
         <div class="gooditem">
-          <div v-for="gooditem in good.goodsList" :key="gooditem.id">
+          <div
+            v-for="gooditem in good.goodsList"
+            :key="gooditem.id"
+            @click="opendetail(gooditem.id)"
+          >
             <img :src="gooditem.list_pic_url" alt="" />
             <div>
               <p>{{ gooditem.name }}</p>
@@ -37,7 +41,17 @@ export default {
   },
   created() {},
 
-  methods: {},
+  methods: {
+    // 点击跳转至商品详情页面
+    opendetail(val) {
+      this.$router.push({
+        name: "detailsPage",
+        params: {
+          id: val,
+        },
+      });
+    },
+  },
 };
 </script>
 

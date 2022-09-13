@@ -57,19 +57,67 @@
         </div>
       </div>
       <!-- 灰色的横条 -->
-      <div class="color" style="margin-top: 20px"></div>
+      <div class="color"></div>
       <!-- 下面的图片展示 -->
       <div
         class="desc"
         v-html="detailData.info.goods_desc"
         v-if="detailData.info"
       ></div>
+      <!-- 灰色的横条 -->
+      <div class="color"></div>
+      <!-- 常见问题 -->
+      <div class="common-problem">
+        <div class="item-a">
+          <div class="line"></div>
+          <span>常见问题</span>
+          <div class="line"></div>
+        </div>
+        <div class="item-b" v-for="item in detailData.issue" :key="item.id">
+          <div class="ques">
+            <img src="@/assets/icon/redcircle.png" alt="" />
+            <span>{{ item.question }}</span>
+          </div>
+          <span class="answer">
+            {{ item.answer }}
+          </span>
+        </div>
+      </div>
+      <!-- 灰色的横条 -->
+      <div class="color" style="height: 60px; margin-top: 15px"></div>
+      <!-- 大家都在看 -->
+      <div class="seeAll">
+        <div class="item-a">
+          <div class="line"></div>
+          <span>大家都在看</span>
+          <div class="line"></div>
+        </div>
+        <div class="goodsList">
+          <div
+            class="item"
+            v-for="item in detailData.productList"
+            :key="item.id"
+          >
+            <img :src="item.list_pic_url" alt="" />
+            <p class="name">{{ item.name }}</p>
+            <p class="price">￥{{ item.retail_price }}</p>
+          </div>
+        </div>
+      </div>
+      <!-- 底部的添加购物车 -->
+      <van-goods-action>
+        <van-goods-action-icon icon="chat-o" text="客服" dot />
+        <van-goods-action-icon icon="cart-o" text="购物车" badge="0" />
+        <van-goods-action-icon icon="shop-o" text="店铺" badge="0" />
+        <van-goods-action-button type="warning" text="加入购物车" />
+        <van-goods-action-button type="danger" text="立即购买" />
+      </van-goods-action>
     </div>
   </div>
 </template>
 
 <script>
-import '@/assets/detailCss/index.css'
+import "@/assets/detailCss/index.css";
 import { goodsDetails } from "@/api/home/detailsPage";
 export default {
   name: "LegouIndex",
@@ -82,10 +130,10 @@ export default {
 
   created() {
     goodsDetails({
-      id: 1134030,
+      id: this.$route.params.id,
       openId: localStorage.getItem("openId"),
     }).then((res) => {
-      console.log(res);
+      // console.log(res.data);
       this.detailData = res.data;
     });
   },
@@ -97,3 +145,4 @@ export default {
   },
 };
 </script>
+ 

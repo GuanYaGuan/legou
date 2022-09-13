@@ -57,7 +57,7 @@
         <li
           v-for="item in dataInfo.newGoods"
           :key="item.id"
-          @click="opendetail"
+          @click="opendetail(item.id)"
         >
           <img :src="item.list_pic_url" alt="" />
           <p class="name">{{ item.name }}</p>
@@ -79,7 +79,7 @@
     <!--  -->
     <div class="hotGoods">
       <ul>
-        <li v-for="item in dataInfo.hotGoods" :key="item.id">
+        <li v-for="item in dataInfo.hotGoods" :key="item.id" @click="opendetail(item.id)">
           <img :src="item.list_pic_url" alt="" />
           <p class="name">{{ item.name }}</p>
           <p class="goods_brief">{{ item.goods_brief }}</p>
@@ -166,8 +166,13 @@ export default {
       });
     },
     // 点击跳转至商品详情页面
-    opendetail() {
-      this.$router.push("/home/detailsPage");
+    opendetail(val) {
+      this.$router.push({
+        name: "detailsPage",
+        params: {
+          id: val,
+        },
+      });
     },
     // 点击跳转至新品商品页
     newgoods() {
