@@ -44,7 +44,7 @@
       </div>
     </div>
     <!-- 新品首发 -->
-    <div class="new-title">
+    <div class="new-title" @click="newgoods">
       <img src="@/assets/bgcoimge/new.png" alt="" />
       <div>
         <span>新品首发</span>
@@ -63,7 +63,7 @@
       </ul>
     </div>
     <!-- 好物精选 -->
-    <div class="good-title">
+    <div class="good-title" @click="newgoods">
       <img src="@/assets/bgcoimge/new2.png" alt="" />
       <div>
         <span>人气推荐</span>
@@ -164,6 +164,10 @@ export default {
     // 点击跳转至商品详情页面
     opendetail(){
       this.$router.push('/home/detailsPage')
+    },
+    // 点击跳转至新品商品页
+    newgoods(){
+      this.$router.push('/home/newgoods')
     }
   },
 };
