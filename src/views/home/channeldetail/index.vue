@@ -7,12 +7,17 @@
       @click-left="onClickLeft"
     />
     <van-tabs @click="sendId" v-model="active">
-      <van-tab v-for="item in categoryNav.navData" :key="item.id" :title="item.name" :name="item.id" >
+      <van-tab
+        v-for="item in categoryNav.navData"
+        :key="item.id"
+        :title="item.name"
+        :name="item.id"
+      >
         <div class="header">
           <p class="title">{{ item.name }}</p>
           <p class="desc">{{ item.front_desc }}</p>
         </div>
-        <div class="goodsList">
+        <div class="goodsList" v-if="isshow">
           <div class="goods">
             <div class="item" v-for="item in goodsList" :key="item.id">
               <img :src="item.list_pic_url" alt="" />
@@ -21,6 +26,8 @@
             </div>
           </div>
         </div>
+        <!-- 没有商品是显示 -->
+        <div class="brandTip" v-else>数据库暂无数据...</div>
       </van-tab>
     </van-tabs>
   </div>
@@ -29,25 +36,32 @@
 <script>
 import { categoryNav, goodsList } from "@/api/home/channeldetail";
 export default {
-
   data() {
     return {
       categoryNav: {},
       goodsList: {},
-      active:this.$route.params.id
+      active: this.$route.params.id,
+      isshow: true,
     };
   },
-
-  created() {
+  // 监听数据
+  watch: {
+    goodsList: function (val) {
+      if (val == "undefinded" || val.length <= 0) {
+        // console.log("数据为空");
+        this.isshow = false;
+      }
+    },
+  },
+  async created() {
     // console.log(this.$route.params.id);
-    categoryNav({
+    const res=await categoryNav({
       id: this.$route.params.id,
-    }).then((res) => {
+    })
       // console.log(res.data);
       this.categoryNav = res.data;
-    });
 
-    this.channelInit(this.$route.params.id)
+    await this.channelInit(this.$route.params.id);
   },
 
   methods: {
@@ -107,6 +121,15 @@ div {
           }
         }
       }
+    }
+    .brandTip {
+      width: 100%;
+      height: 470px;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #999;
     }
   }
 }

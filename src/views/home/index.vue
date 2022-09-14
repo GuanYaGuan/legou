@@ -91,7 +91,7 @@
     <div class="topicList">
       <div class="topicList-top">
         <span> 专题精选 </span>
-        <van-icon name="play-circle-o" size="25" />
+        <img src="@/assets/icon/right.png" alt="">
       </div>
       <ul>
         <li v-for="item in dataInfo.topicList" :key="item.id">
@@ -461,6 +461,10 @@ div {
       margin: 20px 500px;
       span {
         width: 50px;
+      }
+      img{
+        width: 18px;
+        height: 18px;
       }
     }
     ul {

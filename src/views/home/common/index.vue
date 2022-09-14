@@ -19,6 +19,10 @@
               <span>￥{{ gooditem.retail_price }}</span>
             </div>
           </div>
+          <div class="arrow">
+            <p>{{ good.name }}</p>
+            <img src="@/assets/icon/icon_go_more.png" alt="" />
+          </div>
         </div>
       </div>
     </div>
@@ -27,7 +31,6 @@
 
 <script>
 export default {
-
   data() {
     return {};
   },
@@ -71,9 +74,11 @@ div {
         justify-content: space-around;
         width: 100%;
         margin: 0 auto;
+        /*
         :last-child {
           margin-right: 50%;
         }
+        */
         div {
           width: 180px;
           background: #fff;
@@ -100,6 +105,26 @@ div {
               color: #9c3232;
               margin-bottom: 5px;
             }
+          }
+        }
+        .arrow {
+          position: relative;
+          p {
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 185px;
+            line-height: 22px;
+            font-size: 16px;
+          }
+          img {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
           }
         }
       }

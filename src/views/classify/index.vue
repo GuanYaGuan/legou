@@ -24,7 +24,12 @@
           <div class="line"></div>
         </div>
         <ul class="item">
-          <li class="little" v-for="item in navList.subList" :key="item.id">
+          <li
+            class="little"
+            v-for="item in navList.subList"
+            :key="item.id"
+            @click="channeldetail(item.id)"
+          >
             <img :src="item.wap_banner_url" alt="" />
             <p>{{ item.name }}</p>
           </li>
@@ -76,6 +81,15 @@ export default {
       }).then((res) => {
         // console.log(res.data.data.currentOne);
         this.navList = res.data.data.currentOne;
+      });
+    },
+    //  点击打开 详情列表
+    channeldetail(val) {
+      this.$router.push({
+        name: "channeldetail",
+        params: {
+          id: val,
+        },
       });
     },
   },
