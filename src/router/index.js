@@ -72,7 +72,7 @@ const routes = [
     path:'/topic/topicdetails',
     name:'topicdetails',
     component:()=>import('../views/topic/topicdetails/index.vue')
-  }
+  },
 ]
 
 const router = new VueRouter({
