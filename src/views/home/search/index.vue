@@ -19,7 +19,7 @@
       <div class="historybox">
         <div class="title">
           <span>历史记录</span>
-          <van-icon name="delete-o" @click="delHistory()" />
+          <van-icon name="delete-o" @click="delHis()" />
         </div>
         <div class="desc" v-show="isshow">
           <ul>
@@ -101,7 +101,7 @@ export default {
   },
   */
   created() {
-    this.isshow = true;
+    // this.isshow = true;
     keywords({
       openId: localStorage.getItem("openId"),
     }).then((res) => {
@@ -156,7 +156,7 @@ export default {
       });
     },
     // 点击删除 历史记录
-    delHistory() {
+    delHis() {
       this.isshow = false;
       delHistory({
         openId: localStorage.getItem("openId"),
