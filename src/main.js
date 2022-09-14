@@ -6,6 +6,8 @@ import store from './store'
 import * as vant from '../src/plugs/vant.js'
 import 'lib-flexible'
 
+Vue.prototype.$bus = new Vue()
+
 Vue.config.productionTip = false
 
 new Vue({

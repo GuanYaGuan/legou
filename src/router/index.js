@@ -73,6 +73,11 @@ const routes = [
     name:'topicdetails',
     component:()=>import('../views/topic/topicdetails/index.vue')
   },
+  {
+    path:'/home/map',
+    name:'map',
+    component:()=>import('../views/home/map/index.vue')
+  }
 ]
 
 const router = new VueRouter({

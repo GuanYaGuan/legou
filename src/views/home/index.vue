@@ -2,10 +2,15 @@
   <div class="homebody">
     <!-- 导航栏 -->
     <div class="nav">
-      <van-icon size="20" name="location-o" />
-      <van-icon size="20" name="search" />
-      <div @click="openSearch">
-        <input type="text" placeholder="搜索商品" />
+      <div @click="targetMap" class="item-a">
+        <span v-if="city">{{ city }}</span>
+        <van-icon v-else size="20" name="location-o" />
+      </div>
+      <div class="item-b">
+        <van-icon size="20" name="search" />
+        <div @click="openSearch">
+          <input type="text" placeholder="搜索商品" />
+        </div>
       </div>
     </div>
     <!-- 轮播图 -->
@@ -79,7 +84,11 @@
     <!--  -->
     <div class="hotGoods">
       <ul>
-        <li v-for="item in dataInfo.hotGoods" :key="item.id" @click="opendetail(item.id)">
+        <li
+          v-for="item in dataInfo.hotGoods"
+          :key="item.id"
+          @click="opendetail(item.id)"
+        >
           <img :src="item.list_pic_url" alt="" />
           <p class="name">{{ item.name }}</p>
           <p class="goods_brief">{{ item.goods_brief }}</p>
@@ -91,7 +100,7 @@
     <div class="topicList">
       <div class="topicList-top">
         <span> 专题精选 </span>
-        <img src="@/assets/icon/right.png" alt="">
+        <img src="@/assets/icon/right.png" alt="" />
       </div>
       <ul>
         <li v-for="item in dataInfo.topicList" :key="item.id">
@@ -123,11 +132,26 @@ export default {
   data() {
     return {
       dataInfo: "",
+      city: "",
     };
+  },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      // 这里的 vm 相当于 指向外面的 this
+      vm.city = from.params.message;
+    });
   },
   components: {
     common,
     Home,
+  },
+
+  mounted() {
+    var _this = this;
+    if (this.$store.state.cityInfo.name) {
+      _this.city = this.$store.state.cityInfo.name;
+      return;
+    }
   },
 
   created() {
@@ -143,6 +167,10 @@ export default {
   },
 
   methods: {
+    // 点击跳转到地图页面
+    targetMap() {
+      this.$router.push("/home/map");
+    },
     // 点击跳转到 search 页面
     openSearch() {
       this.$router.push("/home/search");
@@ -208,23 +236,38 @@ div {
     flex-wrap: nowrap;
     line-height: 16px;
     padding: 15px;
-    .van-icon {
-      margin: 0 10px;
+    .item-a {
+      span {
+        width: 60px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 12px;
+        line-height: 20px;
+      }
+      .van-icon {
+        margin: 0 10px;
+      }
     }
-    div {
-      width: 200px;
-      height: 100%;
-      input {
-        box-sizing: border-box;
-        min-width: 0;
-        margin: 0;
-        padding: 0;
-        color: #323233;
-        line-height: inherit;
-        text-align: left;
-        background-color: transparent;
-        border: 0;
-        resize: none;
+    .item-b {
+      .van-icon {
+        margin: 0 10px;
+      }
+      div {
+        width: 200px;
+        height: 100%;
+        input {
+          box-sizing: border-box;
+          min-width: 0;
+          margin: 0;
+          padding: 0;
+          color: #323233;
+          line-height: inherit;
+          text-align: left;
+          background-color: transparent;
+          border: 0;
+          resize: none;
+        }
       }
     }
   }
@@ -462,7 +505,7 @@ div {
       span {
         width: 50px;
       }
-      img{
+      img {
         width: 18px;
         height: 18px;
       }
