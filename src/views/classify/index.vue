@@ -1,68 +1,102 @@
 <template>
   <div>
     <van-search placeholder="商品搜索" input-align="center" />
-    <van-tree-select
+    <div class="classify">
+      <div class="nav">
+        <ul class="nav-box">
+          <li class="item" v-for="item in items" :key="item.active">
+           <span class="navTitle"  @click="addActive"> {{ item.text }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="list"></div>
+    </div>
+    <!-- <van-tree-select
       height="115vw"
       :items="items"
-      :main-active-index.sync="active"
+      :main-active-index.sync="items.active"
+      @click="sendId(items.active)"
     >
-      <template #content>
-        <van-image
-          v-if="active === 0"
-          src="https://img01.yzcdn.cn/vant/apple-1.jpg"
-        />
-        <van-image
-          v-if="active === 1"
-          src="https://img01.yzcdn.cn/vant/apple-2.jpg"
-        />
-        <van-image
-          v-if="active === 2"
-          src="https://img01.yzcdn.cn/vant/apple-1.jpg"
-        />
-        <van-image
-          v-if="active === 3"
-          src="https://img01.yzcdn.cn/vant/apple-2.jpg"
-        />
-        <van-image
-          v-if="active === 4"
-          src="https://img01.yzcdn.cn/vant/apple-1.jpg"
-        />
-        <van-image
-          v-if="active === 5"
-          src="https://img01.yzcdn.cn/vant/apple-2.jpg"
-        />
-        <van-image
-          v-if="active === 6"
-          src="https://img01.yzcdn.cn/vant/apple-1.jpg"
-        />
-        <van-image
-          v-if="active === 7"
-          src="https://img01.yzcdn.cn/vant/apple-2.jpg"
-        />
-        <van-image
-          v-if="active === 8"
-          src="https://img01.yzcdn.cn/vant/apple-1.jpg"
-        />
+      <template slot="content" style="width: 200px; overflow-y: 0">
+        <ul class="right-content">
+          <img :src="navList.banner_url" style="width: 100%" alt="" />
+          <li v-for="item in navList.subList" :key="item.id">
+            <img :src="item.wap_banner_url" alt="" />
+            {{ item.name }}
+          </li>
+        </ul>
       </template>
-    </van-tree-select>
+    </van-tree-select> -->
   </div>
 </template>
 
 <script>
+import { currentaction, indexaction } from "@/api/classify";
 export default {
   data() {
     return {
-      active: 0,
-      items: [{ text: "居家" }, { text: "餐厨" }, { text: "饮食" }, { text: "配件" }
-      , { text: "服装" }, { text: "婴童" }, { text: "杂货" }, { text: "洗护" }, { text: "志趣" }],
+      active: "",
+      items: [],
+      navList: [],
     };
   },
 
-  mounted() {},
-
-  methods: {},
+  created() {
+    // 请求的分类列表
+    currentaction({
+      id: 1005000,
+    }).then((res) => {
+      console.log(res.data.data.currentOne);
+      this.navList = res.data.data.currentOne;
+    });
+    // 请求的分类导航
+    indexaction().then((res) => {
+      // console.log(res.data.categoryList);
+      for (let i = 0; i < res.data.categoryList.length; i++) {
+        this.items.push({
+          active: res.data.categoryList[i].id,
+          text: res.data.categoryList[i].name,
+        });
+      }
+    });
+  },
+  methods: {
+    addActive(){
+      // console.log("被点击了");
+      document.querySelector('.navTitle').addclass('active')
+    }
+  },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+div {
+  .classify {
+    display: flex;
+    justify-content: flex-start;
+    .nav {
+      width: 70px;
+      .nav-box{
+        margin-top: 10px;
+        .item{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 70px;
+          height: 50px;
+          font-size: 16px;
+          span{
+            width: 70px;
+            line-height: 50px;
+          }
+        }
+        .item.active{
+          border-left: 2px solid #ab2b2b;
+        }
+      }
+    }
+    .list {
+    }
+  }
+}
 </style>
