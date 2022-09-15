@@ -66,7 +66,7 @@ const routes = [
   {
     path:'/home/newgoods',
     name:'newgoods',
-    component:()=>import('../views/home/newgoods/index.vue')
+    component:()=>import('../views/home/newgoods/index.vue'),
   },
   {
     path:'/topic/topicdetails',

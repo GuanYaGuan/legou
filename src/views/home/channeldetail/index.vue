@@ -19,7 +19,12 @@
         </div>
         <div class="goodsList" v-if="isshow">
           <div class="goods">
-            <div class="item" v-for="item in goodsList" :key="item.id">
+            <div
+              class="item"
+              v-for="item in goodsList"
+              :key="item.id"
+              @click="opendetail(item.id)"
+            >
               <img :src="item.list_pic_url" alt="" />
               <p class="title">{{ item.name }}</p>
               <p class="price">￥{{ item.retail_price }}</p>
@@ -40,7 +45,7 @@ export default {
     return {
       categoryNav: {},
       goodsList: {},
-      active: this.$route.params.id,
+      active: this.$route.query.id,
       isshow: true,
     };
   },
@@ -55,16 +60,25 @@ export default {
   },
   async created() {
     // console.log(this.$route.params.id);
-    const res=await categoryNav({
-      id: this.$route.params.id,
-    })
-      // console.log(res.data);
-      this.categoryNav = res.data;
+    const res = await categoryNav({
+      id: this.$route.query.id,
+    });
+    // console.log(res.data);
+    this.categoryNav = res.data;
 
-    await this.channelInit(this.$route.params.id);
+    await this.channelInit(this.$route.query.id);
   },
 
   methods: {
+    // 点击跳转至商品详情
+    opendetail(val) {
+      this.$router.push({
+        name: "detailsPage",
+        params: {
+          id: val,
+        },
+      });
+    },
     onClickLeft() {
       this.$router.back("/home");
     },

@@ -46,14 +46,14 @@ export default {
     topicDetail({
       id: this.$route.params.id,
     }).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       this.topicData = res.data;
     });
   },
 
   methods: {
     onClickLeft() {
-      this.$router.back("/topic");
+      this.$router.back();
     },
   },
 };

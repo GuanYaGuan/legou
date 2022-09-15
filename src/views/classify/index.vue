@@ -1,6 +1,10 @@
 <template>
   <div>
-    <van-search placeholder="商品搜索" input-align="center" />
+    <van-search
+      placeholder="商品搜索,超多好物等你来选!"
+      input-align="center"
+      @click="opensearch"
+    />
     <div class="classify">
       <div class="nav">
         <ul class="nav-box">
@@ -52,7 +56,7 @@ export default {
   async created() {
     // 请求的分类导航
     const res = await indexaction();
-    // console.log(res.data.categoryList);
+    console.log(res.data);
     this.items = res.data.categoryList;
     /* 
       这里对这个数据进行了处理,本来用的是 vant 组件当中的 select 选择框, 需要这种类型的数据 items 但是样式不太好
@@ -68,6 +72,10 @@ export default {
     this.spanactive = this.items[0].id;
   },
   methods: {
+    // 点击打开 search 搜索页面
+    opensearch() {
+      this.$router.push("/home/search");
+    },
     // vue 中点击那个给那个添加上 active 的类名
     addActive(val) {
       // console.log("被点击了");
@@ -79,7 +87,7 @@ export default {
       return currentaction({
         id: num,
       }).then((res) => {
-        // console.log(res.data.data.currentOne);
+        console.log(res.data.data);
         this.navList = res.data.data.currentOne;
       });
     },
@@ -87,7 +95,7 @@ export default {
     channeldetail(val) {
       this.$router.push({
         name: "channeldetail",
-        params: {
+        query: {
           id: val,
         },
       });

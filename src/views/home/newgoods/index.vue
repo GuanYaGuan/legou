@@ -8,9 +8,7 @@
     />
     <div class="goods">
       <div class="goodsNav">
-        <span :class="{'left':color}" @click="othera"
-          >综合</span
-        >
+        <span :class="{ left: color }" @click="othera">综合</span>
         <div class="price" @click="sortPrice">
           <span :class="`${current == 'default' ? '' : 'on'}`">价格</span>
           <span class="arror">
@@ -24,12 +22,15 @@
             />
           </span>
         </div>
-        <span :class="{'right':show}" @click="otherb"
-          >分类</span
-        >
+        <span :class="{ right: show }" @click="otherb">分类</span>
       </div>
       <div>
-        <div class="goodsBox" v-for="item in newgoods.data" :key="item.id">
+        <div
+          class="goodsBox"
+          v-for="item in newgoods.data"
+          :key="item.id"
+          @click="opendetail(item.id)"
+        >
           <img :src="item.list_pic_url" alt="" />
           <p class="name">{{ item.name }}</p>
           <p class="price">{{ item.retail_price }}</p>
@@ -47,20 +48,20 @@ export default {
       newgoods: [],
       order: "",
       current: "default", // default up down
-      color:true,
-      show:false,
+      color: true,
+      show: false,
     };
   },
-
   created() {
     this.init();
+    // 保存
   },
 
   methods: {
     init() {
       isNewHot({
-        isHot: "" || this.$route.params.isHot,
-        isNew: "" || this.$route.params.isNew,
+        isHot: "" || this.$route.query.isNew,
+        isNew: "" || this.$route.query.isHot,
         order: "" || this.order,
       }).then((res) => {
         // console.log(res.data);
@@ -69,8 +70,8 @@ export default {
     },
     // 点击排序价格
     sortPrice() {
-      this.color=false
-      this.show=false
+      this.color = false;
+      this.show = false;
       if (this.current == "default") {
         this.current = "up";
         this.order = "asc";
@@ -88,16 +89,26 @@ export default {
     },
     // 点击价格以外的按钮
     othera() {
-      this.show=false
-      this.current='default'
-      this.color=true
-      this.init()
+      this.show = false;
+      this.current = "default";
+      this.color = true;
+      this.init();
     },
     otherb() {
-      this.show=true
-      this.color=false
-      this.current='default'
-      this.init()
+      this.show = true;
+      this.color = false;
+      this.current = "default";
+      this.init();
+    },
+
+    // 点击跳转至商品详情页
+    opendetail(val) {
+      this.$router.push({
+        name: "detailsPage",
+        params: {
+          id: val,
+        },
+      });
     },
   },
 };
@@ -121,10 +132,10 @@ div {
       .on {
         color: #b4282d;
       }
-      .left{
+      .left {
         color: #b4282d;
       }
-      .right{
+      .right {
         color: #b4282d;
       }
       span {

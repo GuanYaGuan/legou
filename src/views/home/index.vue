@@ -103,7 +103,11 @@
         <img src="@/assets/icon/right.png" alt="" />
       </div>
       <ul>
-        <li v-for="item in dataInfo.topicList" :key="item.id">
+        <li
+          v-for="item in dataInfo.topicList"
+          :key="item.id"
+          @click="openTopicDetails(item.id)"
+        >
           <img :src="item.item_pic_url" alt="" />
           <div>
             <span class="title">{{ item.title }}</span>
@@ -179,7 +183,7 @@ export default {
     channeldetail(val) {
       this.$router.push({
         name: "channeldetail",
-        params: {
+        query: {
           id: val,
         },
       });
@@ -206,7 +210,7 @@ export default {
     newgoods() {
       this.$router.push({
         name: "newgoods",
-        params: {
+        query: {
           isNew: 1,
         },
       });
@@ -215,8 +219,17 @@ export default {
     hotgoods() {
       this.$router.push({
         name: "newgoods",
-        params: {
+        query: {
           isHot: 1,
+        },
+      });
+    },
+    // 点击专题精选跳转至详情页面
+    openTopicDetails(val) {
+      this.$router.push({
+        name: "topicdetails",
+        params: {
+          id: val,
         },
       });
     },
