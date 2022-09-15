@@ -18,7 +18,12 @@
     </div>
     <!-- 底部商品页面 -->
     <div class="brandList" v-if="isshow">
-      <div class="item" v-for="item in brandList.goodsList" :key="item.id">
+      <div
+        class="item"
+        v-for="item in brandList.goodsList"
+        :key="item.id"
+        @click="opendetail(item.id)"
+      >
         <img :src="item.list_pic_url" alt="" />
         <p class="name">{{ item.name }}</p>
         <p class="price">￥{{ item.retail_price }}</p>
@@ -32,7 +37,6 @@
 <script>
 import { detailaction } from "@/api/home/clickbrand";
 export default {
-
   data() {
     return {
       brandList: [],
@@ -45,6 +49,15 @@ export default {
   },
 
   methods: {
+    // 点击跳转至商品详情页面
+    opendetail(val) {
+      this.$router.push({
+        name: "detailsPage",
+        query: {
+          id: val,
+        },
+      });
+    },
     // 点击返回 home 页面
     onClickLeft() {
       this.$router.back("/home");
@@ -52,7 +65,7 @@ export default {
     // 初始化数据
     init() {
       detailaction({
-        id: this.$route.params.id,
+        id: this.$route.query.id,
       }).then((res) => {
         // console.log(res.data);
         this.brandList = res.data;
@@ -120,7 +133,7 @@ div {
         text-align: center;
         font-size: 12px;
       }
-      .price{
+      .price {
         font-size: 14px;
         color: #b4282d;
       }

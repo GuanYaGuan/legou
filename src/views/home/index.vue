@@ -192,7 +192,7 @@ export default {
     clickbrand(val) {
       this.$router.push({
         name: "clickbrand",
-        params: {
+        query: {
           id: val,
         },
       });
@@ -201,7 +201,7 @@ export default {
     opendetail(val) {
       this.$router.push({
         name: "detailsPage",
-        params: {
+        query: {
           id: val,
         },
       });

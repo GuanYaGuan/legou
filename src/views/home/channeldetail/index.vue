@@ -74,7 +74,7 @@ export default {
     opendetail(val) {
       this.$router.push({
         name: "detailsPage",
-        params: {
+        query: {
           id: val,
         },
       });

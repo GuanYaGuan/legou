@@ -89,7 +89,15 @@ export default {
       });
     },
     // 点击删除
-    onDelete() {},
+    onDelete(val) {
+      deleteAction({
+        id:this.$route.query.id
+      })
+      .then(res=>{
+        this.$toast.success("删除成功");
+        this.$router.back('/my/myaddress');
+      })
+    },
     onChangeDetail(val) {
       if (val) {
         this.searchResult = [

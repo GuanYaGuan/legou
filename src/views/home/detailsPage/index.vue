@@ -130,7 +130,7 @@ export default {
 
   created() {
     goodsDetails({
-      id: this.$route.params.id,
+      id: this.$route.query.id,
       openId: localStorage.getItem("openId"),
     }).then((res) => {
       // console.log(res.data);
