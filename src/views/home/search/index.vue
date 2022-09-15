@@ -21,7 +21,7 @@
           <span>历史记录</span>
           <van-icon name="delete-o" @click="delHis()" />
         </div>
-        <div class="desc" v-show="isshow">
+        <div class="desc">
           <ul>
             <li v-for="(item, index) in dataList.historyData" :key="index">
               <span @click="openGoods(item.keyword)">{{ item.keyword }}</span>
@@ -79,14 +79,17 @@
 </template>
 
 <script>
-import { keywords, searchTip, addHistory, delHistory } from "@/api/home/search";
+import {
+  keywords,
+  searchTip,
+  addHistory,
+  delHistory,
+} from "@/api/home/search/index.js";
 export default {
-
   data() {
     return {
       iptVal: "",
       dataList: "",
-      isshow: false,
       current: "default", // 三个节点 default  notice  goods
       noticeList: [],
       goodsList: [],
@@ -101,15 +104,18 @@ export default {
   },
   */
   created() {
-    // this.isshow = true;
-    keywords({
-      openId: localStorage.getItem("openId"),
-    }).then((res) => {
-      this.dataList = res.data;
-    });
+    this.init();
   },
 
   methods: {
+    // 封装请求历史记录
+    init() {
+      keywords({
+        openId: localStorage.getItem("openId"),
+      }).then((res) => {
+        this.dataList = res.data;
+      });
+    },
     onClickLeft() {
       this.$router.back("/home");
     },
@@ -130,12 +136,7 @@ export default {
       } else {
         this.current = "default";
         // 初始化更新 历史记录页面数据
-        this.isshow = true;
-        keywords({
-          openId: localStorage.getItem("openId"),
-        }).then((res) => {
-          this.dataList = res.data;
-        });
+        this.init();
       }
     },
     // 点击展示商品
@@ -154,12 +155,14 @@ export default {
         keyword: val,
         openId: localStorage.getItem("openId"),
       });
+      this.init();
     },
     // 点击删除 历史记录
     delHis() {
-      this.isshow = false;
       delHistory({
         openId: localStorage.getItem("openId"),
+      }).then((res) => {
+        this.init();
       });
     },
     // 点击改变箭头的颜色
@@ -175,6 +178,11 @@ export default {
         // console.log(res);
         this.goodsList = res.data.keywords;
       });
+      addHistory({
+        keyword: val,
+        openId: localStorage.getItem("openId"),
+      });
+      this.init();
     },
     // 点击历史记录打开详情
     openGoods(val) {

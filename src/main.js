@@ -10,9 +10,10 @@ Vue.prototype.$bus = new Vue()
 
 Vue.config.productionTip = false
 
-new Vue({
-  router,
-  store,
-  vant,
-  render: h => h(App)
-}).$mount('#app')
+
+  new Vue({
+    router,
+    store,
+    vant,
+    render: h => h(App)
+  }).$mount('#app')
