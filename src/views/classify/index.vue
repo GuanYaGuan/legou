@@ -56,7 +56,7 @@ export default {
   async created() {
     // 请求的分类导航
     const res = await indexaction();
-    console.log(res.data);
+    // console.log(res.data);
     this.items = res.data.categoryList;
     /* 
       这里对这个数据进行了处理,本来用的是 vant 组件当中的 select 选择框, 需要这种类型的数据 items 但是样式不太好
@@ -87,7 +87,7 @@ export default {
       return currentaction({
         id: num,
       }).then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         this.navList = res.data.data.currentOne;
       });
     },

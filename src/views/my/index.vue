@@ -6,10 +6,11 @@
     </div>
     <van-grid :column-num="3">
       <van-grid-item
-      style="height:70px;"
+        style="height: 70px"
         v-for="value in mydata"
         :key="value"
         :text="value"
+        @click="openPage(value)"
       />
     </van-grid>
   </div>
@@ -19,13 +20,28 @@
 export default {
   data() {
     return {
-        mydata:["我的订单","优惠券","我的足迹","我的收藏","地址管理","联系客服","帮助中心","意见反馈"]
+      mydata: [
+        "我的订单",
+        "优惠券",
+        "我的足迹",
+        "我的收藏",
+        "地址管理",
+        "联系客服",
+        "帮助中心",
+        "意见反馈",
+      ],
     };
   },
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    openPage(value) {
+      if (value === "地址管理") {
+        this.$router.push('/my/myaddress')
+      }
+    },
+  },
 };
 </script>
 

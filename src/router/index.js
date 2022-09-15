@@ -77,6 +77,16 @@ const routes = [
     path:'/home/map',
     name:'map',
     component:()=>import('../views/home/map/index.vue')
+  },
+  {
+    path:'/my/myaddress',
+    name:'myadress',
+    component:()=>import('../views/my/myaddress/index.vue')
+  },
+  {
+    path:'/my/myaddress/addAdress',
+    name:'addAdress',
+    component:()=>import('../views/my/myaddress/addAdress/index.vue')
   }
 ]
 
