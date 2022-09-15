@@ -40,6 +40,12 @@ export default {
       if (value === "地址管理") {
         this.$router.push('/my/myaddress')
       }
+      if(value==="我的收藏"){
+        this.$router.push('/my/collection')
+      }
+      if(value==="意见反馈"){
+        this.$router.push('/my/suggest')
+      }
     },
   },
 };

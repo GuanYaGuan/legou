@@ -87,7 +87,17 @@ const routes = [
     path:'/my/myaddress/addAdress',
     name:'addAdress',
     component:()=>import('../views/my/myaddress/addAdress/index.vue')
-  }
+  },
+  {
+    path:'/my/collection',
+    name:'collection',
+    component:()=>import('../views/my/collection/index.vue')
+  },
+  {
+    path:'/my/suggest',
+    name:'suggest',
+    component:()=>import('../views/my/suggest/index.vue')
+  },
 ]
 
 const router = new VueRouter({

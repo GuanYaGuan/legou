@@ -31,8 +31,10 @@ export default {
         "https://ts1.cn.mm.bing.net/th?id=OIP-C.EDFxoFWjEClOj5hNL6qFkQAAAA&w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2",
     };
     var openId = userInfo.openId;
+    var nickName=userInfo.nickName;
     localStorage.setItem("userInfo", JSON.stringify(userInfo));
     localStorage.setItem("openId", openId);
+    localStorage.setItem("nickName", nickName);
   },
   // 监听页面路由的变化, 反向思维, 要去的路由路径在 以下 数组路径 当中 存在 就为 true
   watch: {
