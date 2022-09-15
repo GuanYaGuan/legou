@@ -6,24 +6,34 @@
       left-arrow
       @click-left="onClickLeft"
     />
-    <!-- 新增收货地址按钮 -->
-    <div class="addButton" @click="addAddress">
-      +新建收货地址
+    <!-- 获取的地址列表展示区域 -->
+    <div class="address">
+      <ul class="list">
+        <li class="item" v-for="item in addressList" :key="item.id">
+          <div class="left">{{ item.name }}</div>
+          <div class="detail">
+            <p class="tel">{{ item.mobile }}</p>
+            <p class="address">{{ item.address + item.address_detail }}</p>
+          </div>
+          <div class="right">
+            <van-icon size="25" name="edit" @click="openEdit(item.id)" />
+          </div>
+        </li>
+      </ul>
     </div>
+    <!-- 新增收货地址按钮 -->
+    <div class="addButton" @click="addAddress">+新建收货地址</div>
   </div>
 </template>
 
 <script>
 // 四个接口分别是 获取 保存 详情 删除
-import {
-  getListAction,
-  saveAction,
-  detailAction,
-  deleteAction,
-} from "@/api/my/address";
+import { getListAction, detailAction, deleteAction } from "@/api/my/address";
 export default {
   data() {
-    return {};
+    return {
+      addressList: [],
+    };
   },
 
   created() {
@@ -31,7 +41,8 @@ export default {
     getListAction({
       openId: localStorage.getItem("openId"),
     }).then((res) => {
-      console.log(res.data);
+    //   console.log(res.data.data);
+      this.addressList = res.data.data;
     });
   },
 
@@ -41,9 +52,18 @@ export default {
       this.$router.back("/my");
     },
     // 点击 添加 地址
-    addAddress(){
-        this.$router.push("/my/myaddress/addAdress");
-    }
+    addAddress() {
+      this.$router.push("/my/myaddress/addAdress");
+    },
+    // 点击 打开 编辑页面
+    openEdit(val) {
+      this.$router.push({
+        name: "addAdress",
+        query: {
+            id:val
+        },
+      });
+    },
   },
 };
 </script>
@@ -55,7 +75,7 @@ div {
     bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
-    border: 1Px solid #f00;
+    border: 1px solid #f00;
     height: 40px;
     position: fixed;
     left: 50%;
@@ -67,6 +87,52 @@ div {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .address {
+    width: 100%;
+    .list {
+      height: 560px;
+      overflow: auto;
+      .item {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 10px 0;
+        border-bottom: 1px solid rgba(204, 204, 204, 0.295);
+        .left {
+          width: 20%;
+          margin: 0 10px;
+          height: 40px;
+        }
+        .detail {
+          width: 60%;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          align-content: center;
+          width: 220px;
+          margin: 0 10px;
+          height: 80px;
+          .tel {
+            height: 20px;
+            margin: 0;
+            padding: 0;
+          }
+          .address {
+            display: flex;
+            justify-content: flex-start;
+            height: 20px;
+            margin: 0;
+            padding: 0;
+          }
+        }
+        .right {
+          width: 20%;
+        }
+      }
+    }
   }
 }
 </style>

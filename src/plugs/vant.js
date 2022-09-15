@@ -22,6 +22,7 @@ import {
     GoodsActionIcon, 
     GoodsActionButton,
     AddressEdit,
+    Toast
 } from 'vant'
 
 Vue.use(Tabbar);
@@ -46,3 +47,4 @@ Vue.use(GoodsAction);
 Vue.use(GoodsActionIcon);
 Vue.use(GoodsActionButton);
 Vue.use(AddressEdit);
+Vue.use(Toast);
