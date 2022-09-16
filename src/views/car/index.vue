@@ -131,7 +131,9 @@ export default {
       });
     },
     // 提交订单
-    onSubmit() {},
+    onSubmit() {
+      this.$router.push("/car/orders")
+    },
   },
 };
 </script>

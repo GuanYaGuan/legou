@@ -98,6 +98,11 @@ const routes = [
     name:'suggest',
     component:()=>import('../views/my/suggest/index.vue')
   },
+  {
+    path:'/car/orders',
+    name:'orders',
+    component:()=>import('../views/car/orders/index.vue')
+  },
 ]
 
 const router = new VueRouter({

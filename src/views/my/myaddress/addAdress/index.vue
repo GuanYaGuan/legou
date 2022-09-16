@@ -47,7 +47,7 @@ export default {
       id: this.$route.query.id,
     })
     .then(res=>{
-      console.log(res.data.data);
+      // console.log(res.data.data);
       this.list=res.data.data;
     })
   },
