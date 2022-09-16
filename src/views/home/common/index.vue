@@ -16,7 +16,7 @@
             <img :src="gooditem.list_pic_url" alt="" />
             <div>
               <p>{{ gooditem.name }}</p>
-              <span>￥{{ gooditem.retail_price }}</span>
+              <p class="price">￥{{ gooditem.retail_price }}</p>
             </div>
           </div>
           <div class="arrow">
@@ -94,14 +94,16 @@ div {
             margin: 0 auto;
           }
           div {
-            width: 120px;
-            margin-left: 20%;
+            display: flex;
+            flex-wrap: wrap;
+            width: 88px;
+            margin-left: 25%;
             p {
               overflow: hidden;
               text-overflow: ellipsis;
               white-space: nowrap;
             }
-            span {
+            .price {
               color: #9c3232;
               margin-bottom: 5px;
             }

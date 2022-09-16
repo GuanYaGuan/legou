@@ -15,7 +15,7 @@ if (process.env.NODE_ENV == "development") {
 var instance = axios.create({
     //基础地址
     baseURL: host,
-    timeout: 5 * 1000
+    timeout: 5 * 10000
 })
 
 //请求拦截器

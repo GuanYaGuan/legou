@@ -25,7 +25,9 @@ import {
     Toast,
     Field,
     Popup,
-    Stepper 
+    Stepper,
+    SwipeCell,
+    Button,
 } from 'vant'
 
 Vue.use(Tabbar);
@@ -54,3 +56,5 @@ Vue.use(Toast);
 Vue.use(Field);
 Vue.use(Popup);
 Vue.use(Stepper );
+Vue.use(SwipeCell );
+Vue.use(Button );

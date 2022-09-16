@@ -128,6 +128,7 @@
           type="warning"
           @click="addCar"
           text="加入购物车"
+          v-model="count"
         />
         <van-goods-action-button type="danger" text="立即购买" />
       </van-goods-action>
@@ -157,6 +158,7 @@
 </template>
 
 <script>
+import { addCart } from "@/api/car";
 import "@/assets/detailCss/index.css";
 import { goodsDetails } from "@/api/home/detailsPage";
 import { addcollect } from "@/api/home/detailsPage/addcollect";
@@ -167,6 +169,7 @@ export default {
       isshow: true,
       show: false,
       value: 1,
+      count: 0,
     };
   },
 
@@ -175,7 +178,7 @@ export default {
       id: this.$route.query.id,
       openId: localStorage.getItem("openId"),
     }).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       this.detailData = res.data;
     });
   },
@@ -207,7 +210,21 @@ export default {
     },
     // 点击 打开 添加购物车
     addCar() {
+      this.count++;
       this.showPopup();
+      if (this.count === 2) {
+        addCart({
+          goodsId: this.$route.query.id,
+          number: this.value,
+          openId: localStorage.getItem("openId"),
+        }).then((res) => {
+          // console.log(res.data.data);
+          if(res.data.data==="success"){
+            this.$toast.success('添加成功');
+          }
+        });
+        this.count = 0;
+      }
     },
     showPopup() {
       this.show = true;

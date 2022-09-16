@@ -15,36 +15,123 @@
         <div class="item">满88元免邮费</div>
       </div>
     </div>
-    <van-card
-      num="2"
-      price="2.00"
-      desc="描述信息"
-      title="商品标题"
-      thumb="https://img01.yzcdn.cn/vant/ipad.jpeg"
-    />
-    <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit">
-      <van-checkbox v-model="checked">全选</van-checkbox>
-      <template #tip>
-        你的收货地址不支持同城送,
-        <span @click="onClickEditAddress">修改地址</span>
-      </template>
-    </van-submit-bar>
+    <!-- 购物车列表展示 -->
+    <div class="goods-box">
+      <van-swipe-cell v-for="item in dataList" :key="item.id">
+        <van-checkbox v-model="item.isSelected"></van-checkbox>
+        <van-card
+          :num="item.number"
+          :price="item.retail_price"
+          :desc="item.goods_name"
+          class="goods-card"
+          :thumb="item.list_pic_url"
+        />
+        <template #right>
+          <van-button
+            square
+            text="删除"
+            type="danger"
+            class="delete-button"
+            @click="delList(item.id)"
+          />
+        </template>
+      </van-swipe-cell>
+    </div>
+    <!-- 底部提交订单 -->
+    <div>
+      <van-submit-bar
+        :price="getTotal"
+        button-text="提交订单"
+        @submit="onSubmit"
+      >
+        <van-checkbox v-model="isAllSelected">全选</van-checkbox>
+      </van-submit-bar>
+    </div>
   </div>
 </template>
 
 <script>
+import { cartList, deleteAction } from "@/api/car";
 export default {
   data() {
     return {
-      checked: "",
+      dataList: [],
     };
   },
+  // 实现全选的方式 监听 数据的变化 watch 推荐 computed
+  computed: {
+    // 全选
+    // isAllSelected 函数形式 默认 只读
+    // isAllSelected() {
+    //   return this.dataList.every(ele=>ele.isSelected==true);
+    // },
+    isAllSelected: {
+      get() {
+        return this.dataList.every((ele) => ele.isSelected == true);
+      },
+      set(val) {
+        console.log(val);
+        // val 为赋值之后的结果
+        this.dataList.forEach((element) => {
+          element.isSelected = val;
+        });
+        /* 可以简写
+        if (val == true) {
+          this.dataList.forEach(element => {
+            element.isSelected = true;
+          });
+        }else{
+          this.dataList.forEach(element => {
+            element.isSelected = false;
+          });
+        }
+        */
+      },
+    },
 
-  mounted() {},
-
+    // 计算 总价格
+    getTotal() {
+      // total 为上一次 循环计算的结果  current 为 当次循环的数据
+      return this.dataList.reduce((total, current) => {
+        if (current.isSelected) {
+          return total + current.retail_price * current.number * 100;
+        } else {
+          return total;
+        }
+      }, 0);
+    },
+  },
+  created() {
+    this.initCart();
+  },
   methods: {
+    // 封装 初始化请求 列表数据
+    initCart() {
+      cartList({
+        openId: localStorage.getItem("openId"),
+      }).then((res) => {
+        // console.log(res.data.data);
+        // 对数据进行处理 添加一条 属性 来表示 选中的状态
+        // 新添加的属性 不是 响应式的数据 必须在 赋值 之前 操作
+        res.data.data.forEach((element) => {
+          element.isSelected = false;
+        });
+        this.dataList = res.data.data;
+      });
+    },
+    // 点击删除 商品列表
+    delList(val) {
+      deleteAction({
+        id: val,
+      }).then((res) => {
+        if ((res.data.data = "true")) {
+          this.$toast.success("删除成功");
+          this.initCart();
+        }
+      });
+    },
+    // 提交订单
     onSubmit() {},
-    onClickEditAddress() {},
   },
 };
 </script>
@@ -76,12 +163,45 @@ div {
       }
     }
   }
-  .van-card{
-    background-color: #fff;
-    border-bottom: 1px solid rgba(122, 120, 120, 0.08);
+  .goods-box {
+    width: 100%;
+    height: 530px;
+    overflow: auto;
+  }
+  .goods-card {
+    margin: 0;
+
+    background-color: white;
+  }
+
+  .delete-button {
+    height: 100%;
   }
   .van-submit-bar {
     margin-bottom: 50px;
+  }
+  .van-swipe-cell .van-checkbox {
+    position: relative;
+    top: 55px;
+    left: 18px;
+    z-index: 21;
+  }
+  .goods-card.van-card {
+    margin-left: 30px;
+  }
+  .van-card__content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    .van-card__desc.van-ellipsis {
+      margin-bottom: 10px;
+    }
+  }
+  .van-card__price {
+    color: #ee0a24;
+  }
+  .van-card__num {
+    margin-left: 160px;
   }
 }
 </style>
