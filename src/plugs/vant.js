@@ -23,7 +23,9 @@ import {
     GoodsActionButton,
     AddressEdit,
     Toast,
-    Field
+    Field,
+    Popup,
+    Stepper 
 } from 'vant'
 
 Vue.use(Tabbar);
@@ -50,3 +52,5 @@ Vue.use(GoodsActionButton);
 Vue.use(AddressEdit);
 Vue.use(Toast);
 Vue.use(Field);
+Vue.use(Popup);
+Vue.use(Stepper );

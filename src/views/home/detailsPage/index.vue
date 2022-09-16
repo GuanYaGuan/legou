@@ -40,7 +40,12 @@
       <!-- 选择产品数量 -->
       <div class="section-nav">
         <span>请选择商品数量</span>
-        <van-icon name="arrow" size="20" />
+        <van-icon
+          name="arrow"
+          style="width: 30px"
+          @click="opengoodInfo"
+          size="20"
+        />
       </div>
       <!-- 灰色的横条 -->
       <div class="color"></div>
@@ -101,17 +106,52 @@
             <img :src="item.list_pic_url" alt="" />
             <p class="name">{{ item.name }}</p>
             <p class="price">￥{{ item.retail_price }}</p>
+            <!-- 底部的添加购物车 -->
           </div>
         </div>
       </div>
-      <!-- 底部的添加购物车 -->
       <van-goods-action>
-        <van-goods-action-icon icon="chat-o" text="客服" dot />
-        <van-goods-action-icon icon="cart-o" text="购物车" badge="0" />
-        <van-goods-action-icon icon="shop-o" text="店铺" badge="0" />
-        <van-goods-action-button type="warning" text="加入购物车" />
+        <van-goods-action-icon
+          icon="star-o"
+          text="收藏"
+          dot
+          :color="isshow ? '' : '#b4282d'"
+          @click="addcollect"
+        />
+        <van-goods-action-icon
+          icon="cart-o"
+          @click="opencarpage"
+          text="购物车"
+          badge="0"
+        />
+        <van-goods-action-button
+          type="warning"
+          @click="addCar"
+          text="加入购物车"
+        />
         <van-goods-action-button type="danger" text="立即购买" />
       </van-goods-action>
+      <!-- 弹出框 -->
+      <van-popup
+        v-model="show"
+        closeable
+        position="bottom"
+        :style="{ height: '40%' }"
+      >
+        <img
+          class="goods-image"
+          style="width: 95px; height: 95px; margin: 20px"
+          :src="detailData.info.primary_pic_url"
+          v-if="detailData.info"
+          alt=""
+        />
+        <p class="price" v-if="detailData.info">
+          价格￥{{ detailData.info.retail_price }}
+        </p>
+        <p class="descInfo">请选择商品数量</p>
+        <p class="numberTitle">数量</p>
+        <van-stepper v-model="value" />
+      </van-popup>
     </div>
   </div>
 </template>
@@ -119,12 +159,14 @@
 <script>
 import "@/assets/detailCss/index.css";
 import { goodsDetails } from "@/api/home/detailsPage";
+import { addcollect } from "@/api/home/detailsPage/addcollect";
 export default {
-
-
   data() {
     return {
       detailData: [],
+      isshow: true,
+      show: false,
+      value: 1,
     };
   },
 
@@ -133,7 +175,7 @@ export default {
       id: this.$route.query.id,
       openId: localStorage.getItem("openId"),
     }).then((res) => {
-      // console.log(res.data);
+      console.log(res.data);
       this.detailData = res.data;
     });
   },
@@ -141,6 +183,34 @@ export default {
   methods: {
     onClickLeft() {
       this.$router.back("/home");
+    },
+    // 点击 发送请求 添加收藏
+    addcollect() {
+      // console.log(val);
+      addcollect({
+        goodsId: this.$route.query.id,
+        openId: localStorage.getItem("openId"),
+      }).then((res) => {
+        // console.log(res.data.data);
+        if (res.data.data === "success") {
+          this.isshow = !this.isshow;
+        }
+      });
+    },
+    // 点击打开 购物车 列表
+    opencarpage() {
+      this.$router.push("/car");
+    },
+    // 点击 打开商品参数
+    opengoodInfo() {
+      this.showPopup();
+    },
+    // 点击 打开 添加购物车
+    addCar() {
+      this.showPopup();
+    },
+    showPopup() {
+      this.show = true;
     },
   },
 };
