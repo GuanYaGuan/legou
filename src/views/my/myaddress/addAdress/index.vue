@@ -45,11 +45,10 @@ export default {
   created() {
     detailAction({
       id: this.$route.query.id,
-    })
-    .then(res=>{
+    }).then((res) => {
       // console.log(res.data.data);
-      this.list=res.data.data;
-    })
+      this.list = res.data.data;
+    });
   },
 
   methods: {
@@ -84,19 +83,19 @@ export default {
         // console.log(res.data.data); // true or fasle
         if (res.data.data) {
           this.$toast.success("添加成功");
-          this.$router.back('/my/myaddress');
+          this.$router.back("/my/myaddress");
         }
       });
     },
     // 点击删除
     onDelete(val) {
       deleteAction({
-        id:this.$route.query.id
-      })
-      .then(res=>{
+        id: this.$route.query.id,
+      }).then((res) => {
         this.$toast.success("删除成功");
-        this.$router.back('/my/myaddress');
-      })
+        this.$router.back("/my/myaddress");
+
+      });
     },
     onChangeDetail(val) {
       if (val) {

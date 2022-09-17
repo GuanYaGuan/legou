@@ -9,7 +9,12 @@
     <!-- 获取的地址列表展示区域 -->
     <div class="address">
       <ul class="list">
-        <li class="item" v-for="item in addressList" :key="item.id">
+        <li
+          class="item"
+          @click="openOrder(item)"
+          v-for="item in addressList"
+          :key="item.id"
+        >
           <div class="left">{{ item.name }}</div>
           <div class="detail">
             <p class="tel">{{ item.mobile }}</p>
@@ -41,7 +46,7 @@ export default {
     getListAction({
       openId: localStorage.getItem("openId"),
     }).then((res) => {
-    //   console.log(res.data.data);
+      //   console.log(res.data.data);
       this.addressList = res.data.data;
     });
   },
@@ -49,7 +54,7 @@ export default {
   methods: {
     // 点击返回 我的 页面
     onClickLeft() {
-      this.$router.back("/my");
+      this.$router.back();
     },
     // 点击 添加 地址
     addAddress() {
@@ -60,9 +65,16 @@ export default {
       this.$router.push({
         name: "addAdress",
         query: {
-            id:val
+          id: val,
         },
       });
+    },
+    // 点击地址跳转至订单页面
+    openOrder(val) {
+      localStorage.setItem("address", JSON.stringify(val));
+      // 使用 push 的方法 浏览器历史记录会增加一条记录 所以会在 两个页面之间来回切换
+      this.$router.push("/car/orders");
+
     },
   },
 };

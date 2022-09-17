@@ -14,15 +14,15 @@
           'background-image': `url(${require('@/assets/icon/address-bg-bd.png')})`,
         }"
       ></div>
-      <div class="address-info" v-if="orderList.address">
+      <div class="address-info" @click="openAddress" v-if="address">
         <div class="left">
-          <div class="name">{{ orderList.address.name }}</div>
+          <div class="name">{{ address.name }}</div>
           <div class="dot">默认</div>
         </div>
         <div class="detail-info">
-          <p class="number">{{ orderList.address.mobile }}</p>
+          <p class="number">{{ address.mobile }}</p>
           <p class="address">
-            {{ orderList.address.address + orderList.address.address_detail }}
+            {{ address.address + address_detail }}
           </p>
         </div>
         <van-icon class="right" name="arrow" />
@@ -45,24 +45,26 @@
       <div class="item" v-if="false"></div>
     </div>
     <!-- 商品展示 -->
-    <van-swipe-cell v-for="item in orderList.goodsList" :key="item.id">
-      <van-card
-        :num="item.number"
-        :price="item.retail_price"
-        :desc="item.goods_name"
-        class="goods-card"
-        :thumb="item.list_pic_url"
-      />
-      <template #right>
-        <van-button
-          square
-          text="删除"
-          type="danger"
-          class="delete-button"
-          @click="delList(item.id)"
+    <div class="goods-list">
+      <van-swipe-cell v-for="item in orderList.goodsList" :key="item.id">
+        <van-card
+          :num="item.number"
+          :price="item.retail_price"
+          :desc="item.goods_name"
+          class="goods-card"
+          :thumb="item.list_pic_url"
         />
-      </template>
-    </van-swipe-cell>
+        <template #right>
+          <van-button
+            square
+            text="删除"
+            type="danger"
+            class="delete-button"
+            @click="delList(item.id)"
+          />
+        </template>
+      </van-swipe-cell>
+    </div>
     <!-- 支付 -->
     <div class="paif">
       <div class="left">实付:￥{{ orderList.allPrise }}</div>
@@ -77,22 +79,37 @@ export default {
   data() {
     return {
       orderList: [],
+      address:{}
     };
   },
 
   created() {
-    orderdetailAction({
-      openId: localStorage.getItem("openId"),
-      addressId: "",
-    }).then((res) => {
-      console.log(res.data);
-      this.orderList = res.data;
-    });
+    
+    this.init()
   },
   methods: {
+    init() {
+      orderdetailAction({
+        openId: localStorage.getItem("openId"),
+        addressId: "",
+      }).then((res) => {
+        console.log(res.data);
+        this.orderList = res.data;
+        var address=JSON.parse(localStorage.getItem("address"));
+        if(address){
+          this.address=address
+        }else{
+          this.address=res.data.address
+        }
+      });
+    },
     // 点击返回
     onClickLeft() {
       this.$router.back("/my");
+    },
+    // 点击 打开 选择地址
+    openAddress() {
+      this.$router.push("/my/myaddress");
     },
   },
 };
@@ -216,16 +233,22 @@ div {
         div {
           background-color: #fff;
         }
-        .van-card__bottom{
+        .van-card__bottom {
+          width: calc(100% - 10px);
+          display: flex;
+          justify-content: space-between;
           margin-top: 20px;
-          .van-card__num{
-            margin-left: 200px;
-          }
         }
       }
     }
   }
-  .van-button__content{
+  .goods-list {
+    width: 100%;
+    height: 325px;
+    overflow: auto;
+    background-color: #fff;
+  }
+  .van-button__content {
     background-color: #ee0a24;
   }
   .goods-card {
@@ -238,7 +261,7 @@ div {
   }
   .paif {
     width: 100%;
-    height: 50px;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -248,12 +271,14 @@ div {
     padding: 0;
     .left {
       margin-left: 20px;
+      font-size: 14px;
+      color: #b4282d;
     }
     .right {
       margin: 0;
       padding: 0;
-      width: 90px;
-      height: 50px;
+      width: 100px;
+      height: 60px;
       background-color: #b4282d;
       display: flex;
       align-items: center;
