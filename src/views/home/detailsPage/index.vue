@@ -130,7 +130,11 @@
           text="加入购物车"
           v-model="count"
         />
-        <van-goods-action-button type="danger" text="立即下单" />
+        <van-goods-action-button
+          type="danger"
+          @click="openOrder()"
+          text="立即下单"
+        />
       </van-goods-action>
       <!-- 弹出框 -->
       <van-popup
@@ -180,13 +184,13 @@ export default {
   },
   created() {
     // 购物车列表
-    this.initCart()
+    this.initCart();
     // 商品详情
     goodsDetails({
       id: this.$route.query.id,
       openId: localStorage.getItem("openId"),
     }).then((res) => {
-      // console.log(res.data);
+      console.log(res.data);
       this.detailData = res.data;
     });
   },
@@ -251,6 +255,20 @@ export default {
     },
     showPopup() {
       this.show = true;
+    },
+    // 点击 打开订单页面
+    openOrder() {
+      this.count++;
+      this.showPopup();
+      if (this.count === 2) {
+        this.$router.push({
+          name: "orders",
+          query: {
+            allPrise: this.detailData.info.retail_price * this.value,
+          },
+        });
+        this.count = 0;
+      }
     },
   },
 };

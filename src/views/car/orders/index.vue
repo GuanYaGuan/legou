@@ -32,7 +32,13 @@
     <div class="order-info">
       <div class="item" v-if="orderList.allPrise">
         <span class="left">商品合计</span>
-        <span class="right">￥{{ orderList.allPrise }}</span>
+        <span class="right"
+          >￥{{
+            this.$route.query.allPrise
+              ? this.$route.query.allPrise
+              : orderList.allPrise
+          }}</span
+        >
       </div>
       <div class="item">
         <span class="left">运费</span>
@@ -45,7 +51,7 @@
       <div class="item" v-if="false"></div>
     </div>
     <!-- 商品展示 -->
-    <div class="goods-list">
+    <div class="goods-list" v-if="this.$route.query.allPrise ? false : true">
       <van-swipe-cell v-for="item in orderList.goodsList" :key="item.id">
         <van-card
           :num="item.number"
@@ -67,7 +73,13 @@
     </div>
     <!-- 支付 -->
     <div class="paif">
-      <div class="left">实付:￥{{ orderList.allPrise }}</div>
+      <div class="left">
+        实付:￥{{
+          this.$route.query.allPrise
+            ? this.$route.query.allPrise
+            : orderList.allPrise
+        }}
+      </div>
       <div class="right">支付</div>
     </div>
   </div>
@@ -79,13 +91,12 @@ export default {
   data() {
     return {
       orderList: [],
-      address:{}
+      address: {},
     };
   },
 
   created() {
-    
-    this.init()
+    this.init();
   },
   methods: {
     init() {
@@ -95,11 +106,11 @@ export default {
       }).then((res) => {
         console.log(res.data);
         this.orderList = res.data;
-        var address=JSON.parse(localStorage.getItem("address"));
-        if(address){
-          this.address=address
-        }else{
-          this.address=res.data.address
+        var address = JSON.parse(localStorage.getItem("address"));
+        if (address) {
+          this.address = address;
+        } else {
+          this.address = res.data.address;
         }
       });
     },
