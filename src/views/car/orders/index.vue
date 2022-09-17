@@ -14,23 +14,25 @@
           'background-image': `url(${require('@/assets/icon/address-bg-bd.png')})`,
         }"
       ></div>
-      <div class="address-info">
+      <div class="address-info" v-if="orderList.address">
         <div class="left">
-          <div class="name">姓名</div>
+          <div class="name">{{ orderList.address.name }}</div>
           <div class="dot">默认</div>
         </div>
         <div class="detail-info">
-          <p class="number">19541254578</p>
-          <p class="address">内蒙古呼号浩特</p>
+          <p class="number">{{ orderList.address.mobile }}</p>
+          <p class="address">
+            {{ orderList.address.address + orderList.address.address_detail }}
+          </p>
         </div>
         <van-icon class="right" name="arrow" />
       </div>
     </div>
     <!-- 订单信息 -->
     <div class="order-info">
-      <div class="item">
+      <div class="item" v-if="orderList.allPrise">
         <span class="left">商品合计</span>
-        <span class="right">￥1699</span>
+        <span class="right">￥{{ orderList.allPrise }}</span>
       </div>
       <div class="item">
         <span class="left">运费</span>
@@ -43,26 +45,39 @@
       <div class="item" v-if="false"></div>
     </div>
     <!-- 商品展示 -->
-    <van-card
-      num="2"
-      price="2.00"
-      desc="描述信息"
-      title="商品标题"
-      thumb="https://img01.yzcdn.cn/vant/ipad.jpeg"
-    />
+    <van-swipe-cell v-for="item in orderList.goodsList" :key="item.id">
+      <van-card
+        :num="item.number"
+        :price="item.retail_price"
+        :desc="item.goods_name"
+        class="goods-card"
+        :thumb="item.list_pic_url"
+      />
+      <template #right>
+        <van-button
+          square
+          text="删除"
+          type="danger"
+          class="delete-button"
+          @click="delList(item.id)"
+        />
+      </template>
+    </van-swipe-cell>
     <!-- 支付 -->
     <div class="paif">
-      <div class="left">实付:￥1699</div>
+      <div class="left">实付:￥{{ orderList.allPrise }}</div>
       <div class="right">支付</div>
     </div>
   </div>
 </template>
 
 <script>
-import { orderdetailAction, ordersubmitAction } from "@/api/orders";
+import { orderdetailAction } from "@/api/orders";
 export default {
   data() {
-    return {};
+    return {
+      orderList: [],
+    };
   },
 
   created() {
@@ -70,7 +85,8 @@ export default {
       openId: localStorage.getItem("openId"),
       addressId: "",
     }).then((res) => {
-      console.log(res);
+      console.log(res.data);
+      this.orderList = res.data;
     });
   },
   methods: {
@@ -85,7 +101,7 @@ export default {
 <style lang="scss" scoped>
 div {
   background-color: #f7f8f9b6;
-  
+
   .van-nav-bar.van-hairline--bottom {
     background-color: #fff;
   }
@@ -111,15 +127,22 @@ div {
         margin-left: 5%;
         background-color: #fff;
         .name {
+          width: 13px;
+          overflow: hidden;
+          text-overflow: " ";
+          white-space: nowrap;
           margin-right: 50%;
-          margin-left: 5px;
+          margin-left: 10px;
+          letter-spacing: 3px;
         }
         .dot {
           margin-top: 10px;
           width: 30px;
           height: 18px;
           border: 1px solid red;
-          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
       }
       .detail-info {
@@ -186,12 +209,32 @@ div {
         }
       }
       .van-card__content {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
         background-color: #fff;
         div {
           background-color: #fff;
         }
+        .van-card__bottom{
+          margin-top: 20px;
+          .van-card__num{
+            margin-left: 200px;
+          }
+        }
       }
     }
+  }
+  .van-button__content{
+    background-color: #ee0a24;
+  }
+  .goods-card {
+    margin: 0;
+    background-color: white;
+  }
+
+  .delete-button {
+    height: 100%;
   }
   .paif {
     width: 100%;
@@ -209,7 +252,7 @@ div {
     .right {
       margin: 0;
       padding: 0;
-      width: 70px;
+      width: 90px;
       height: 50px;
       background-color: #b4282d;
       display: flex;

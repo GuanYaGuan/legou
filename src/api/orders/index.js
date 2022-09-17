@@ -14,7 +14,7 @@ function ordersubmitAction(data) {
     return request({
         method: "post",
         url: "/order/submitAction",
-        data
+        data:data
     })
 }
 

@@ -122,7 +122,7 @@
           icon="cart-o"
           @click="opencarpage"
           text="购物车"
-          badge="0"
+          :badge="dataList.length"
         />
         <van-goods-action-button
           type="warning"
@@ -130,7 +130,7 @@
           text="加入购物车"
           v-model="count"
         />
-        <van-goods-action-button type="danger" text="立即购买" />
+        <van-goods-action-button type="danger" text="立即下单" />
       </van-goods-action>
       <!-- 弹出框 -->
       <van-popup
@@ -158,9 +158,14 @@
 </template>
 
 <script>
+// 请求 购物车列表 获取一下购物车 列表数量
+import { cartList } from "@/api/car";
+// 添加购物车
 import { addCart } from "@/api/car";
 import "@/assets/detailCss/index.css";
+// 商品详情
 import { goodsDetails } from "@/api/home/detailsPage";
+// 添加 收藏
 import { addcollect } from "@/api/home/detailsPage/addcollect";
 export default {
   data() {
@@ -170,10 +175,13 @@ export default {
       show: false,
       value: 1,
       count: 0,
+      dataList: [],
     };
   },
-
   created() {
+    // 购物车列表
+    this.initCart()
+    // 商品详情
     goodsDetails({
       id: this.$route.query.id,
       openId: localStorage.getItem("openId"),
@@ -184,6 +192,20 @@ export default {
   },
 
   methods: {
+    // 封装 初始化请求 列表数据
+    initCart() {
+      cartList({
+        openId: localStorage.getItem("openId"),
+      }).then((res) => {
+        // console.log(res.data.data);
+        // 对数据进行处理 添加一条 属性 来表示 选中的状态
+        // 新添加的属性 不是 响应式的数据 必须在 赋值 之前 操作
+        res.data.data.forEach((element) => {
+          element.isSelected = false;
+        });
+        this.dataList = res.data.data;
+      });
+    },
     onClickLeft() {
       this.$router.back("/home");
     },
@@ -219,8 +241,9 @@ export default {
           openId: localStorage.getItem("openId"),
         }).then((res) => {
           // console.log(res.data.data);
-          if(res.data.data==="success"){
-            this.$toast.success('添加成功');
+          if (res.data.data === "success") {
+            this.$toast.success("添加成功");
+            this.initCart()
           }
         });
         this.count = 0;
