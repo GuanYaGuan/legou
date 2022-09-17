@@ -22,7 +22,7 @@
         <div class="detail-info">
           <p class="number">{{ address.mobile }}</p>
           <p class="address">
-            {{ address.address + address_detail }}
+            {{ address.address + address.address_detail }}
           </p>
         </div>
         <van-icon class="right" name="arrow" />
@@ -109,7 +109,7 @@ export default {
     },
     // 点击 打开 选择地址
     openAddress() {
-      this.$router.push("/my/myaddress");
+      this.$router.push("/my/myAddress");
     },
   },
 };

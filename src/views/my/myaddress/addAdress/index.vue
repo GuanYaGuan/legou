@@ -37,7 +37,7 @@ export default {
         city: "", //城市
         county: "", // 县
         addressDetail: "", // 详细地址
-        isDefault: "false", // 是否为默认地址
+        isDefault: "", // 是否为默认地址
       },
     };
   },
@@ -79,6 +79,7 @@ export default {
         telNumber: list.tel,
         userName: list.name,
         openId: localStorage.getItem("openId"),
+        isDefault:list.isDefault
       }).then((res) => {
         // console.log(res.data.data); // true or fasle
         if (res.data.data) {

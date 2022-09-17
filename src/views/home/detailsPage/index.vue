@@ -243,7 +243,7 @@ export default {
           // console.log(res.data.data);
           if (res.data.data === "success") {
             this.$toast.success("添加成功");
-            this.initCart()
+            this.initCart();
           }
         });
         this.count = 0;

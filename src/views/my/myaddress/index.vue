@@ -21,6 +21,7 @@
             <p class="address">{{ item.address + item.address_detail }}</p>
           </div>
           <div class="right">
+            <van-badge :content="item.is_default === 1 ? '默认' : ''" />
             <van-icon size="25" name="edit" @click="openEdit(item.id)" />
           </div>
         </li>
@@ -46,7 +47,7 @@ export default {
     getListAction({
       openId: localStorage.getItem("openId"),
     }).then((res) => {
-      //   console.log(res.data.data);
+      console.log(res.data.data);
       this.addressList = res.data.data;
     });
   },
@@ -73,8 +74,9 @@ export default {
     openOrder(val) {
       localStorage.setItem("address", JSON.stringify(val));
       // 使用 push 的方法 浏览器历史记录会增加一条记录 所以会在 两个页面之间来回切换
-      this.$router.push("/car/orders");
-
+      // this.$router.push("/car/orders");
+      // 因此这里 我们使用 go 返回上一级  就不会出现 页面之间来回切换
+      this.$router.go(-1);
     },
   },
 };
@@ -141,7 +143,15 @@ div {
           }
         }
         .right {
-          width: 20%;
+          display: flex;
+          justify-content: space-around;
+          flex-wrap: wrap;
+          align-items: center;
+          flex-direction: column;
+          width: 80px;
+          .van-badge{
+            margin-bottom: 15px;
+          }
         }
       }
     }

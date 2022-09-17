@@ -40,7 +40,7 @@
     <!-- 底部提交订单 -->
     <div>
       <van-submit-bar
-        :price="getTotal"
+        :price="getTotal * 100"
         button-text="提交订单"
         @submit="onSubmit"
       >
@@ -95,7 +95,7 @@ export default {
       // total 为上一次 循环计算的结果  current 为 当次循环的数据
       return this.dataList.reduce((total, current) => {
         if (current.isSelected) {
-          return total + current.retail_price * current.number * 100;
+          return total + current.retail_price * current.number;
         } else {
           return total;
         }
@@ -143,13 +143,17 @@ export default {
       // newArr.join(",")
       // console.log(newArr);
       ordersubmitAction({
-        allPrise:this.getTotal,
-        goodsId:this.dataList.filter(ele=>ele.isSelected).map(ele=>{return ele.goods_id}).join(","),
-        openId:localStorage.getItem("openId")
-      })
-      .then(res=>{
+        allPrise: this.getTotal,
+        goodsId: this.dataList
+          .filter((ele) => ele.isSelected)
+          .map((ele) => {
+            return ele.goods_id;
+          })
+          .join(","),
+        openId: localStorage.getItem("openId"),
+      }).then((res) => {
         console.log(res);
-      })
+      });
     },
   },
 };

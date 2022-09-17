@@ -28,6 +28,7 @@ import {
     Stepper,
     SwipeCell,
     Button,
+    Badge
 } from 'vant'
 
 Vue.use(Tabbar);
@@ -58,3 +59,4 @@ Vue.use(Popup);
 Vue.use(Stepper );
 Vue.use(SwipeCell );
 Vue.use(Button );
+Vue.use(Badge );
