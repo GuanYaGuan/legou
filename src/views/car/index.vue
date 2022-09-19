@@ -68,7 +68,12 @@ export default {
     // },
     isAllSelected: {
       get() {
-        return this.dataList.every((ele) => ele.isSelected == true);
+        // 解决初始全选按钮 闪烁 问题
+        if (this.dataList.length > 0) {
+          return this.dataList.every((ele) => ele.isSelected == true);
+        } else {
+          return false;
+        }
       },
       set(val) {
         // console.log(val);
