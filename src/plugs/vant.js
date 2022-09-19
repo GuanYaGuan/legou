@@ -21,14 +21,16 @@ import {
     GoodsAction, 
     GoodsActionIcon, 
     GoodsActionButton,
-    AddressEdit,
     Toast,
     Field,
     Popup,
     Stepper,
     SwipeCell,
     Button,
-    Badge
+    Badge,
+    Cell,
+    CellGroup,
+    Area
 } from 'vant'
 
 Vue.use(Tabbar);
@@ -52,7 +54,7 @@ Vue.use(Tabs);
 Vue.use(GoodsAction);
 Vue.use(GoodsActionIcon);
 Vue.use(GoodsActionButton);
-Vue.use(AddressEdit);
+Vue.use(Area);
 Vue.use(Toast);
 Vue.use(Field);
 Vue.use(Popup);
@@ -60,3 +62,5 @@ Vue.use(Stepper );
 Vue.use(SwipeCell );
 Vue.use(Button );
 Vue.use(Badge );
+Vue.use(Cell );
+Vue.use(CellGroup );

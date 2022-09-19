@@ -190,7 +190,7 @@ export default {
       id: this.$route.query.id,
       openId: localStorage.getItem("openId"),
     }).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       this.detailData = res.data;
     });
   },
@@ -248,6 +248,7 @@ export default {
           if (res.data.data === "success") {
             this.$toast.success("添加成功");
             this.initCart();
+            this.show=false;
           }
         });
         this.count = 0;

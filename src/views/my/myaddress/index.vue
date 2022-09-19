@@ -20,9 +20,9 @@
             <p class="tel">{{ item.mobile }}</p>
             <p class="address">{{ item.address + item.address_detail }}</p>
           </div>
-          <div class="right">
+          <div class="right" @click.stop="openEdit(item.id)" >
             <van-badge :content="item.is_default === 1 ? '默认' : ''" />
-            <van-icon size="25" name="edit" @click="openEdit(item.id)" />
+            <van-icon size="25" name="edit"/>
           </div>
         </li>
       </ul>
@@ -47,7 +47,7 @@ export default {
     getListAction({
       openId: localStorage.getItem("openId"),
     }).then((res) => {
-      console.log(res.data.data);
+      // console.log(res.data.data);
       this.addressList = res.data.data;
     });
   },
@@ -143,6 +143,7 @@ div {
           }
         }
         .right {
+          height: 80px;
           display: flex;
           justify-content: space-around;
           flex-wrap: wrap;

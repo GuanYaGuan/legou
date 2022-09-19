@@ -101,6 +101,14 @@ export default {
 
 <style lang="scss" scoped>
 div {
+  .van-nav-bar.van-hairline--bottom {
+    width: 100%;
+    position: fixed;
+    top: 0;
+  }
+  .van-tabs.van-tabs--line {
+    margin-top: 50px;
+  }
   .van-tab__pane {
     background-color: rgba(214, 212, 212, 0.269);
     padding-top: 10px;

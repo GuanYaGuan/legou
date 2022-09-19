@@ -8,7 +8,11 @@
     background-color: #fff;
 
 }
-
+.van-nav-bar.van-hairline--bottom{
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
 .detail-item .my-swipe .van-swipe-item img {
     width: 100%;
 }

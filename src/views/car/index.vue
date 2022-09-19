@@ -138,26 +138,25 @@ export default {
     },
     // 提交订单
     onSubmit() {
-      this.$router.push("/car/orders");
-      // // 过滤 获取 选中的商品
-      // var arr=this.dataList.filter(ele=>ele.isSelected);
-      // // 获取 商品 id
-      // var newArr=arr.map(ele=>{
-      //   return ele.goods_id
-      // })
-      // newArr.join(",")
-      // console.log(newArr);
-      ordersubmitAction({
-        allPrise: this.getTotal,
-        goodsId: this.dataList
-          .filter((ele) => ele.isSelected)
-          .map((ele) => {
-            return ele.goods_id;
-          })
-          .join(","),
-        openId: localStorage.getItem("openId"),
-      }).then((res) => {
-        console.log(res);
+      this.$router.push({
+        name: "orders",
+        query: {
+          total: this.getTotal,
+          // // 过滤 获取 选中的商品
+          // var arr=this.dataList.filter(ele=>ele.isSelected);
+          // // 获取 商品 id
+          // var newArr=arr.map(ele=>{
+          //   return ele.goods_id
+          // })
+          // newArr.join(",")
+          // console.log(newArr);
+          goodsId: this.dataList
+            .filter((ele) => ele.isSelected)
+            .map((ele) => {
+              return ele.goods_id;
+            })
+            .join(","),
+        },
       });
     },
   },

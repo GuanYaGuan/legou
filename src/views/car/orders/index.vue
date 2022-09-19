@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import { orderdetailAction } from "@/api/orders";
+import { orderdetailAction, ordersubmitAction } from "@/api/orders";
 export default {
   data() {
     return {
@@ -96,7 +96,15 @@ export default {
   },
 
   created() {
-    this.init();
+    ordersubmitAction({
+      allPrise: this.$route.query.total,
+      goodsId: this.$route.query.goodsId,
+      openId: localStorage.getItem("openId"),
+    });
+    // 不管是在 购物车页面 提交订单 还是 在 订单页面 提交订单; 提交订单 和 获取对应商品列表的 axios 请求 初始化 获取 应该 延迟 执行 this.init() 不然订单页面 展示的商品 会是提交订单之前的数据
+    setTimeout(() => {
+      this.init();
+    }, 500);
   },
   methods: {
     init() {
@@ -104,7 +112,7 @@ export default {
         openId: localStorage.getItem("openId"),
         addressId: "",
       }).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.orderList = res.data;
         var address = JSON.parse(localStorage.getItem("address"));
         if (address) {

@@ -117,9 +117,13 @@ export default {
 <style lang="scss" scoped>
 div {
   background-color: rgba(227, 224, 224, 0.185);
+
   .van-nav-bar.van-hairline--bottom {
-    background-color: #fff;
+     background-color: #fff;
     margin: 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
   }
   .goods {
     .goodsNav {
