@@ -122,7 +122,7 @@
           icon="cart-o"
           @click="opencarpage"
           text="购物车"
-          :badge="dataList.length"
+          :badge="getNumber"
         />
         <van-goods-action-button
           type="warning"
@@ -182,6 +182,16 @@ export default {
       dataList: [],
     };
   },
+  // 计算商品数量
+  computed: {
+    getNumber() {
+      var total = 0;
+      for (let i = 0; i < this.dataList.length; i++) {
+        total += this.dataList[i].number;
+      }
+      return total;
+    },
+  },
   created() {
     // 购物车列表
     this.initCart();
@@ -201,7 +211,7 @@ export default {
       cartList({
         openId: localStorage.getItem("openId"),
       }).then((res) => {
-        // console.log(res.data.data);
+        console.log(res.data.data);
         // 对数据进行处理 添加一条 属性 来表示 选中的状态
         // 新添加的属性 不是 响应式的数据 必须在 赋值 之前 操作
         res.data.data.forEach((element) => {
@@ -248,7 +258,7 @@ export default {
           if (res.data.data === "success") {
             this.$toast.success("添加成功");
             this.initCart();
-            this.show=false;
+            this.show = false;
           }
         });
         this.count = 0;

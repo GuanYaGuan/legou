@@ -143,6 +143,7 @@ div {
   }
   .content {
     background-color: #fff;
+    margin-top: 1px;
     .nav-image {
       width: 100%;
       height: 10px;
